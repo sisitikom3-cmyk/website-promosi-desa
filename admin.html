@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Admin Pengaduan - Desa Sepadu
+</title>
+
+
+<style>
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    background: #f1f7ef;
+
+    color: #263b2a;
+}
+
+
+/* HEADER */
+
+header {
+
+    background: #123f25;
+
+    color: white;
+
+    padding: 25px 7%;
+
+    display: flex;
+
+    justify-content:
+    space-between;
+
+    align-items: center;
+}
+
+
+header h1 {
+
+    font-size: 25px;
+}
+
+
+.btn-kembali {
+
+    background: white;
+
+    color: #123f25;
+
+    text-decoration: none;
+
+    padding: 10px 17px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+}
+
+
+/* CONTAINER */
+
+.container {
+
+    max-width: 1250px;
+
+    margin: 35px auto;
+
+    padding: 0 20px;
+}
+
+
+/* STATISTIK */
+
+.dashboard {
+
+    display: grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+.stat {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.08);
+}
+
+
+.stat h2 {
+
+    color: #286b3d;
+
+    font-size: 30px;
+}
+
+
+.stat p {
+
+    color: #68756a;
+}
+
+
+/* TABLE */
+
+.table-box {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.08);
+
+    overflow-x: auto;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse:
+    collapse;
+
+    min-width: 1000px;
+}
+
+
+th {
+
+    background: #286b3d;
+
+    color: white;
+
+    padding: 13px;
+
+    text-align: left;
+}
+
+
+td {
+
+    padding: 12px;
+
+    border-bottom:
+    1px solid #ddd;
+}
+
+
+tr:hover {
+
+    background: #f5f9f3;
+}
+
+
+/* STATUS */
+
+select {
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    border:
+    1px solid #ccc;
+}
+
+
+/* BUTTON */
+
+.detail {
+
+    background: #5b9d35;
+
+    color: white;
+
+    border: none;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+/* MODAL */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    z-index: 1000;
+
+    left: 0;
+
+    top: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background:
+    rgba(0,0,0,.6);
+
+    padding: 30px;
+}
+
+
+.modal-content {
+
+    background: white;
+
+    max-width: 700px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    margin: auto;
+
+    padding: 30px;
+
+    border-radius: 18px;
+}
+
+
+.close {
+
+    float: right;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    color: #777;
+}
+
+
+.detail-item {
+
+    padding: 12px 0;
+
+    border-bottom:
+    1px solid #eee;
+}
+
+
+.detail-item strong {
+
+    color: #286b3d;
+}
+
+
+.map {
+
+    display: inline-block;
+
+    margin-top: 10px;
+
+    background: #286b3d;
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    .dashboard {
+
+        grid-template-columns:
+        1fr 1fr;
+    }
+
+}
+
+
+@media(max-width:550px) {
+
+    header {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    .dashboard {
+
+        grid-template-columns:
+        1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>
+🏡 Admin Pengaduan Desa Sepadu
+</h1>
+
+<a
+href="index.html"
+class="btn-kembali"
+>
+← Website Desa
+</a>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- STATISTIK -->
+
+<div class="dashboard">
+
+
+<div class="stat">
+
+<h2 id="total">
+0
+</h2>
+
+<p>
+Total Pengaduan
+</p>
+
+</div>
+
+
+
+<div class="stat">
+
+<h2 id="diterima">
+0
+</h2>
+
+<p>
+Diterima
+</p>
+
+</div>
+
+
+
+<div class="stat">
+
+<h2 id="diproses">
+0
+</h2>
+
+<p>
+Diproses
+</p>
+
+</div>
+
+
+
+<div class="stat">
+
+<h2 id="selesai">
+0
+</h2>
+
+<p>
+Selesai
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- DATA -->
+
+<div class="table-box">
+
+<h2 style="margin-bottom:20px">
+
+📢 Data Aspirasi & Pengaduan
+
+</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>No</th>
+
+<th>No Tiket</th>
+
+<th>Tanggal</th>
+
+<th>Nama</th>
+
+<th>Kategori</th>
+
+<th>Judul</th>
+
+<th>Status</th>
+
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+
+<tbody
+id="dataPengaduan"
+>
+
+<tr>
+
+<td
+colspan="8"
+style="
+text-align:center;
+padding:30px;
+"
+>
+
+⏳ Memuat data...
+
+</td>
+
+</tr>
+
+</tbody>
+
+
+</table>
+
+</div>
+
+
+</div>
+
+
+
+<!-- MODAL -->
+
+<div
+id="modal"
+class="modal"
+>
+
+<div class="modal-content">
+
+
+<span
+class="close"
+onclick="tutupModal()"
+>
+&times;
+</span>
+
+
+<h2
+style="
+color:#286b3d;
+margin-bottom:20px;
+"
+>
+
+📋 Detail Pengaduan
+
+</h2>
+
+
+<div id="detailData">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+// GANTI DENGAN URL APPS SCRIPT
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx3LS77uL4ODbk620LI8SAbbxuNqRJKzo2ibfuIBwu3S1COIu0kyjWnYhKdtPKQBBGe/exec";
+
+
+
+let semuaData = [];
+
+
+// =============================
+// AMBIL DATA
+// =============================
+
+async function ambilData() {
+
+try {
+
+
+const response =
+await fetch(SCRIPT_URL);
+
+
+semuaData =
+await response.json();
+
+
+tampilkanData();
+
+
+}
+
+catch(error) {
+
+console.error(error);
+
+
+document.getElementById(
+"dataPengaduan"
+).innerHTML = `
+
+<tr>
+
+<td
+colspan="8"
+style="
+text-align:center;
+color:red;
+padding:30px;
+">
+
+❌ Gagal mengambil data.
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+}
+
+
+
+// =============================
+// TAMPILKAN DATA
+// =============================
+
+function tampilkanData() {
+
+
+const tbody =
+document.getElementById(
+"dataPengaduan"
+);
+
+
+tbody.innerHTML = "";
+
+
+let diterima = 0;
+
+let diproses = 0;
+
+let selesai = 0;
+
+
+
+semuaData.forEach(
+(item,index) => {
+
+
+if(item.Status === "Diterima") {
+
+diterima++;
+
+}
+
+
+if(item.Status === "Diproses") {
+
+diproses++;
+
+}
+
+
+if(item.Status === "Selesai") {
+
+selesai++;
+
+}
+
+
+
+tbody.innerHTML += `
+
+<tr>
+
+<td>
+${index + 1}
+</td>
+
+<td>
+<strong>
+${item.Tiket || "-"}
+</strong>
+</td>
+
+<td>
+${item["Tanggal Kirim"] || "-"}
+</td>
+
+<td>
+${
+item.Anonim === "Ya"
+? "ANONIM"
+: item.Nama
+}
+</td>
+
+<td>
+${item.Kategori || "-"}
+</td>
+
+<td>
+${item.Judul || "-"}
+</td>
+
+<td>
+
+<select
+onchange="
+ubahStatus(
+${index},
+this.value
+)
+"
+>
+
+<option
+${
+item.Status === "Diterima"
+? "selected"
+: ""
+}
+>
+Diterima
+</option>
+
+
+<option
+${
+item.Status === "Diproses"
+? "selected"
+: ""
+}
+>
+Diproses
+</option>
+
+
+<option
+${
+item.Status === "Selesai"
+? "selected"
+: ""
+}
+>
+Selesai
+</option>
+
+
+<option
+${
+item.Status === "Ditolak"
+? "selected"
+: ""
+}
+>
+Ditolak
+</option>
+
+</select>
+
+</td>
+
+
+<td>
+
+<button
+class="detail"
+onclick="
+lihatDetail(${index})
+"
+>
+
+Detail
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+
+document.getElementById(
+"total"
+).innerText =
+semuaData.length;
+
+
+document.getElementById(
+"diterima"
+).innerText =
+diterima;
+
+
+document.getElementById(
+"diproses"
+).innerText =
+diproses;
+
+
+document.getElementById(
+"selesai"
+).innerText =
+selesai;
+
+}
+
+
+
+// =============================
+// DETAIL
+// =============================
+
+function lihatDetail(index) {
+
+
+const item =
+semuaData[index];
+
+
+document.getElementById(
+"detailData"
+).innerHTML = `
+
+<div class="detail-item">
+
+<strong>No Tiket</strong>
+
+<br>
+
+${item.Tiket || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Nama Pelapor</strong>
+
+<br>
+
+${
+item.Anonim === "Ya"
+? "ANONIM"
+: item.Nama
+}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>No. WhatsApp</strong>
+
+<br>
+
+${item["No WA"] || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Email</strong>
+
+<br>
+
+${item.Email || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Domisili</strong>
+
+<br>
+
+${item.Kecamatan || "-"},
+${item.Kabupaten || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Kategori</strong>
+
+<br>
+
+${item.Kategori || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Judul</strong>
+
+<br>
+
+${item.Judul || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Isi Pengaduan</strong>
+
+<br>
+
+${item.Isi || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Lokasi Kejadian</strong>
+
+<br>
+
+${item.Lokasi || "-"}
+
+<br>
+
+<a
+class="map"
+href="${item.Maps || "#"}"
+target="_blank"
+>
+
+📍 Lihat Lokasi Maps
+
+</a>
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Tanggal Kejadian</strong>
+
+<br>
+
+${item["Tanggal Kejadian"] || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Waktu Kejadian</strong>
+
+<br>
+
+${item["Waktu Kejadian"] || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Status</strong>
+
+<br>
+
+${item.Status || "-"}
+
+</div>
+
+
+<div class="detail-item">
+
+<strong>Bersedia Dihubungi</strong>
+
+<br>
+
+${item["Bersedia Dihubungi"] || "-"}
+
+</div>
+
+`;
+
+
+document.getElementById(
+"modal"
+).style.display =
+"block";
+
+}
+
+
+
+// =============================
+// TUTUP MODAL
+// =============================
+
+function tutupModal() {
+
+document.getElementById(
+"modal"
+).style.display =
+"none";
+
+}
+
+
+
+// =============================
+// UBAH STATUS
+// =============================
+
+async function ubahStatus(
+index,
+status
+) {
+
+
+const item =
+semuaData[index];
+
+
+alert(
+"Status akan diubah menjadi: "
++ status
+);
+
+
+/*
+
+Untuk mengubah status langsung
+di Google Sheets, Apps Script
+perlu fungsi update khusus.
+
+*/
+
+}
+
+
+
+// LOAD DATA
+
+ambilData();
+
+
+// AUTO REFRESH 30 DETIK
+
+setInterval(
+ambilData,
+30000
+);
+
+</script>
+
+
+</body>
+
+</html>
