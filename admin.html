@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Pengaduan - Desa Sepadu</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f8f4;
+  color: #333;
+}
+
+header {
+  background: linear-gradient(135deg,#176b3a,#2e9d5b);
+  color: white;
+  padding: 25px;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin: 7px 0 0;
+}
+
+.back {
+  color: white;
+  text-decoration: none;
+  border: 1px solid white;
+  padding: 9px 14px;
+  border-radius: 8px;
+}
+
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 25px auto;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns:
+  repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.stat h3 {
+  margin: 0 0 10px;
+  color: #176b3a;
+}
+
+.stat-number {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.panel {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.refresh {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background: #176b3a;
+  color: white;
+  cursor: pointer;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #176b3a;
+  color: white;
+}
+
+select {
+  padding: 8px;
+  border-radius: 7px;
+  border: 1px solid #bbb;
+}
+
+.detail-btn {
+  border: none;
+  background: #2e9d5b;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.status {
+  font-weight: bold;
+}
+
+#loading {
+  text-align: center;
+  padding: 25px;
+}
+
+#error {
+  display: none;
+  background: #ffe5e5;
+  color: #a00;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* MODAL */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-box {
+  max-width: 800px;
+  margin: 30px auto;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.detail {
+  margin-top: 25px;
+}
+
+.detail-item {
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-item strong {
+  display: block;
+  color: #176b3a;
+  margin-bottom: 5px;
+}
+
+.maps {
+  color: #176b3a;
+}
+
+@media(max-width:800px) {
+
+  .stats {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+@media(max-width:500px) {
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-content">
+
+<div>
+
+<h1>🏡 Admin Pengaduan</h1>
+
+<p>
+Desa Sepadu - Dusun Semayang
+</p>
+
+</div>
+
+<a class="back" href="index.html">
+← Website Desa
+</a>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="stats">
+
+<div class="stat">
+
+<h3>Total Pengaduan</h3>
+
+<div class="stat-number"
+id="total">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<h3>Diterima</h3>
+
+<div class="stat-number"
+id="diterima">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<h3>Diproses</h3>
+
+<div class="stat-number"
+id="diproses">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<h3>Selesai</h3>
+
+<div class="stat-number"
+id="selesai">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div id="error"></div>
+
+
+<div class="panel">
+
+<div class="top">
+
+<h2>📋 Data Pengaduan</h2>
+
+<button class="refresh"
+onclick="ambilData()">
+🔄 Refresh
+</button>
+
+</div>
+
+
+<div id="loading">
+⏳ Mengambil data...
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>No</th>
+<th>No Tiket</th>
+<th>Tanggal</th>
+<th>Nama</th>
+<th>Kategori</th>
+<th>Judul</th>
+<th>Status</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelData"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MODAL DETAIL -->
+
+<div class="modal"
+id="modal">
+
+<div class="modal-box">
+
+<span class="close"
+onclick="tutupModal()">
+&times;
+</span>
+
+<h2>📄 Detail Pengaduan</h2>
+
+<div class="detail"
+id="detail"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbxpdACxQCqy68WaCMkW9jSZLc5K12YcDwwOs9oupQRtEmGk2WROH9iVrGGw5oDQ6yyR/exec";
+
+
+let semuaData = [];
+
+
+async function ambilData() {
+
+  document.getElementById("loading")
+    .style.display = "block";
+
+  document.getElementById("error")
+    .style.display = "none";
+
+  try {
+
+    const response =
+      await fetch(SCRIPT_URL);
+
+    if (!response.ok) {
+      throw new Error(
+        "Server tidak merespons dengan benar."
+      );
+    }
+
+    const data =
+      await response.json();
+
+    semuaData = data;
+
+    tampilkanData(data);
+
+  }
+
+  catch(error) {
+
+    console.error(error);
+
+    document.getElementById("error")
+      .style.display = "block";
+
+    document.getElementById("error")
+      .innerText =
+      "❌ Gagal mengambil data. Pastikan URL Web App benar, deployment sudah aktif, dan akses disetel 'Siapa saja'.";
+
+  }
+
+  finally {
+
+    document.getElementById("loading")
+      .style.display = "none";
+
+  }
+
+}
+
+
+function tampilkanData(data) {
+
+  const tbody =
+    document.getElementById("tabelData");
+
+  tbody.innerHTML = "";
+
+
+  let diterima = 0;
+  let diproses = 0;
+  let selesai = 0;
+
+
+  data.forEach((item,index) => {
+
+    const status =
+      item.Status || "Diterima";
+
+
+    if(status === "Diterima")
+      diterima++;
+
+    if(status === "Diproses")
+      diproses++;
+
+    if(status === "Selesai")
+      selesai++;
+
+
+    const tr =
+      document.createElement("tr");
+
+
+    tr.innerHTML = `
+
+      <td>${index + 1}</td>
+
+      <td>
+        <b>${aman(item.Tiket)}</b>
+      </td>
+
+      <td>
+        ${aman(item["Tanggal Kirim"])}
+      </td>
+
+      <td>
+        ${item.Anonim === "Ya"
+          ? "Anonim"
+          : aman(item.Nama)}
+      </td>
+
+      <td>
+        ${aman(item.Kategori)}
+      </td>
+
+      <td>
+        ${aman(item.Judul)}
+      </td>
+
+      <td>
+
+        <select
+          onchange="ubahStatus(${index},this.value)">
+
+          <option
+          ${status==="Diterima"?"selected":""}>
+          Diterima
+          </option>
+
+          <option
+          ${status==="Diproses"?"selected":""}>
+          Diproses
+          </option>
+
+          <option
+          ${status==="Selesai"?"selected":""}>
+          Selesai
+          </option>
+
+          <option
+          ${status==="Ditolak"?"selected":""}>
+          Ditolak
+          </option>
+
+        </select>
+
+      </td>
+
+      <td>
+
+        <button
+          class="detail-btn"
+          onclick="lihatDetail(${index})">
+
+          👁 Detail
+
+        </button>
+
+      </td>
+
+    `;
+
+
+    tbody.appendChild(tr);
+
+  });
+
+
+  document.getElementById("total")
+    .innerText = data.length;
+
+  document.getElementById("diterima")
+    .innerText = diterima;
+
+  document.getElementById("diproses")
+    .innerText = diproses;
+
+  document.getElementById("selesai")
+    .innerText = selesai;
+
+}
+
+
+function aman(value) {
+
+  if(value === null ||
+     value === undefined ||
+     value === "") {
+
+    return "-";
+
+  }
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function lihatDetail(index) {
+
+  const item =
+    semuaData[index];
+
+
+  document.getElementById("detail")
+    .innerHTML = `
+
+      <div class="detail-item">
+        <strong>No. Tiket</strong>
+        ${aman(item.Tiket)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Nama Pelapor</strong>
+        ${
+          item.Anonim === "Ya"
+          ? "Anonim"
+          : aman(item.Nama)
+        }
+      </div>
+
+      <div class="detail-item">
+        <strong>No. WhatsApp</strong>
+        ${aman(item["No WA"])}
+      </div>
+
+      <div class="detail-item">
+        <strong>Email</strong>
+        ${aman(item.Email)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Wilayah</strong>
+        ${aman(item.Kecamatan)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Kategori</strong>
+        ${aman(item.Kategori)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Judul</strong>
+        ${aman(item.Judul)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Isi Pengaduan</strong>
+        ${aman(item.Isi)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Lokasi Kejadian</strong>
+        ${aman(item.Lokasi)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Google Maps</strong>
+        ${
+          item.Maps
+          ? `<a class="maps"
+             href="${aman(item.Maps)}"
+             target="_blank">
+             📍 Buka Lokasi
+             </a>`
+          : "-"
+        }
+      </div>
+
+      <div class="detail-item">
+        <strong>Tanggal Kejadian</strong>
+        ${aman(item["Tanggal Kejadian"])}
+      </div>
+
+      <div class="detail-item">
+        <strong>Waktu Kejadian</strong>
+        ${aman(item["Waktu Kejadian"])}
+      </div>
+
+      <div class="detail-item">
+        <strong>Status</strong>
+        ${aman(item.Status)}
+      </div>
+
+      <div class="detail-item">
+        <strong>Bersedia Dihubungi</strong>
+        ${aman(item["Bersedia Dihubungi"])}
+      </div>
+
+    `;
+
+
+  document.getElementById("modal")
+    .style.display = "block";
+
+}
+
+
+function tutupModal() {
+
+  document.getElementById("modal")
+    .style.display = "none";
+
+}
+
+
+window.onclick = function(event) {
+
+  const modal =
+    document.getElementById("modal");
+
+  if(event.target === modal) {
+    tutupModal();
+  }
+
+}
+
+
+async function ubahStatus(index,status) {
+
+  const item =
+    semuaData[index];
+
+
+  if(!confirm(
+    `Ubah status tiket ${item.Tiket} menjadi ${status}?`
+  )) {
+
+    ambilData();
+    return;
+
+  }
+
+
+  /*
+   * Bagian ini membutuhkan fungsi updateStatus
+   * di Code.gs.
+   */
+
+  try {
+
+    const response =
+      await fetch(SCRIPT_URL, {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "text/plain"
+        },
+
+        body: JSON.stringify({
+
+          action: "updateStatus",
+
+          tiket: item.Tiket,
+
+          status: status
+
+        })
+
+      });
+
+
+    alert(
+      "Permintaan perubahan status telah dikirim."
+    );
+
+    ambilData();
+
+  }
+
+  catch(error) {
+
+    alert(
+      "Gagal mengubah status."
+    );
+
+    ambilData();
+
+  }
+
+}
+
+
+ambilData();
+
+
+setInterval(
+  ambilData,
+  30000
+);
+
+</script>
+
+</body>
+</html>
