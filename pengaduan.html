@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Aspirasi & Pengaduan - Desa Sepadu
+</title>
+
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+    background: #f3f8f1;
+
+    color: #263b2a;
+
+    line-height: 1.6;
+}
+
+
+/* HEADER */
+
+header {
+
+    background:
+    linear-gradient(
+        rgba(18,67,37,.9),
+        rgba(18,67,37,.9)
+    );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 50px 20px;
+}
+
+header h1 {
+
+    font-size: 38px;
+
+    margin-bottom: 10px;
+}
+
+
+/* CONTAINER */
+
+.container {
+
+    max-width: 850px;
+
+    margin: 40px auto;
+
+    padding: 0 20px;
+}
+
+
+/* FORM */
+
+.form-box {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow:
+    0 8px 30px
+    rgba(0,0,0,.08);
+}
+
+
+.info {
+
+    background: #e8f4e4;
+
+    border-left:
+    5px solid #5b9d35;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    margin-bottom: 30px;
+}
+
+
+/* SECTION */
+
+.section-title {
+
+    color: #22613a;
+
+    font-size: 23px;
+
+    margin:
+    30px 0 15px;
+
+    border-bottom:
+    2px solid #dcebd8;
+
+    padding-bottom: 8px;
+}
+
+
+/* LABEL */
+
+label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-top: 17px;
+
+    margin-bottom: 7px;
+}
+
+.required {
+
+    color: red;
+}
+
+
+/* INPUT */
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+    1px solid #ccd9c9;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+textarea {
+
+    min-height: 150px;
+
+    resize: vertical;
+}
+
+
+/* FOCUS */
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color: #5b9d35;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(91,157,53,.12);
+}
+
+
+/* DUA KOLOM */
+
+.dua {
+
+    display: grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* BANTUAN */
+
+.bantuan {
+
+    font-size: 13px;
+
+    color: #68756a;
+
+    margin-top: 5px;
+}
+
+
+/* CHECKBOX */
+
+.check {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items:
+    flex-start;
+
+    background: #f5f9f3;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-top: 20px;
+}
+
+.check input {
+
+    width: auto;
+
+    margin-top: 5px;
+}
+
+
+/* BUTTON */
+
+.btn {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #5b9d35;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 25px;
+}
+
+.btn:hover {
+
+    background: #3d7223;
+}
+
+
+/* HASIL */
+
+#hasil {
+
+    display: none;
+
+    text-align: center;
+
+    background: #e8f6e4;
+
+    border:
+    2px solid #83b878;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    margin-top: 25px;
+}
+
+
+#nomorTiket {
+
+    display: block;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #22613a;
+
+    margin: 10px;
+}
+
+
+.kembali {
+
+    display: block;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #286b3d;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+
+/* MOBILE */
+
+@media(max-width:650px) {
+
+    header h1 {
+
+        font-size: 28px;
+    }
+
+    .form-box {
+
+        padding: 22px;
+    }
+
+    .dua {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>
+📢 Aspirasi & Pengaduan
+</h1>
+
+<p>
+Desa Sepadu - Dusun Semayang
+</p>
+
+<p>
+Sampaikan laporan dengan mudah,
+jelas, dan bertanggung jawab.
+</p>
+
+</header>
+
+
+
+<div class="container">
+
+<div class="form-box">
+
+
+<div class="info">
+
+<strong>
+💡 Siapa, Di mana, Apa, Kapan
+</strong>
+
+<br>
+
+Lengkapi informasi agar pengaduan
+dapat diproses dengan cepat dan tepat.
+
+</div>
+
+
+
+<form id="formAspirasi">
+
+
+<!-- DATA PELAPOR -->
+
+<h2 class="section-title">
+
+1. 👤 Data Pelapor
+
+</h2>
+
+
+<label>
+Nama Lengkap
+<span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="nama"
+placeholder="Masukkan nama lengkap"
+required
+>
+
+
+<label>
+No. HP / WhatsApp
+<span class="required">*</span>
+</label>
+
+<input
+type="tel"
+id="telepon"
+placeholder="Contoh: 081234567890"
+required
+>
+
+
+<label>
+Email
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="nama@email.com"
+>
+
+
+<div class="dua">
+
+<div>
+
+<label>
+Kecamatan
+<span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="kecamatan"
+placeholder="Contoh: Semparuk"
+required
+>
+
+</div>
+
+
+<div>
+
+<label>
+Kota / Kabupaten
+<span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="kabupaten"
+placeholder="Contoh: Sambas"
+required
+>
+
+</div>
+
+</div>
+
+
+
+<!-- PENGADUAN -->
+
+<h2 class="section-title">
+
+2. 📝 Detail Pengaduan
+
+</h2>
+
+
+<label>
+Kategori / Jenis
+<span class="required">*</span>
+</label>
+
+<select id="kategori" required>
+
+<option value="">
+-- Pilih Kategori --
+</option>
+
+<option>Infrastruktur</option>
+
+<option>Jalan Rusak</option>
+
+<option>Kesehatan</option>
+
+<option>Pendidikan</option>
+
+<option>Lingkungan</option>
+
+<option>Kebersihan</option>
+
+<option>Karhutla / Jerebu</option>
+
+<option>Keamanan</option>
+
+<option>Pelayanan Desa</option>
+
+<option>Ekonomi / UMKM</option>
+
+<option>Sosial</option>
+
+<option>Budaya</option>
+
+<option>Lainnya</option>
+
+</select>
+
+
+
+<label>
+
+Judul / Ringkasan Singkat
+
+<span class="required">*</span>
+
+</label>
+
+<input
+type="text"
+id="judul"
+placeholder="Contoh: Jalan Dusun Semayang rusak"
+required
+>
+
+
+
+<label>
+
+Isi Aspirasi / Pengaduan
+
+<span class="required">*</span>
+
+</label>
+
+<textarea
+id="isi"
+placeholder="Ceritakan apa yang terjadi, kronologi, dampak, dan harapan Anda..."
+required
+></textarea>
+
+
+
+<label>
+
+Lokasi Kejadian
+
+<span class="required">*</span>
+
+</label>
+
+<input
+type="text"
+id="lokasi"
+placeholder="Alamat lengkap lokasi kejadian"
+required
+>
+
+
+
+<label>
+
+Titik Google Maps
+
+<span class="required">*</span>
+
+</label>
+
+<input
+type="url"
+id="maps"
+placeholder="Tempel link Google Maps"
+required
+>
+
+
+<a
+href="https://maps.google.com"
+target="_blank"
+style="
+display:inline-block;
+margin-top:10px;
+padding:10px 15px;
+background:#286b3d;
+color:white;
+border-radius:8px;
+text-decoration:none;
+">
+
+📍 Buka Google Maps
+
+</a>
+
+
+
+<label>
+
+Tanggal Kejadian
+
+<span class="required">*</span>
+
+</label>
+
+<input
+type="date"
+id="tanggal"
+required
+>
+
+
+
+<label>
+
+Waktu Kejadian
+
+</label>
+
+<input
+type="time"
+id="waktu"
+>
+
+
+
+<!-- PRIVASI -->
+
+<h2 class="section-title">
+
+3. 🔒 Privasi
+
+</h2>
+
+
+<div class="check">
+
+<input
+type="checkbox"
+id="anonim"
+>
+
+<label
+for="anonim"
+style="margin:0"
+>
+
+Lapor sebagai anonim
+
+</label>
+
+</div>
+
+
+<p class="bantuan">
+
+Nama Anda dapat disembunyikan.
+Nomor WhatsApp tetap digunakan untuk
+konfirmasi apabila diperlukan.
+
+</p>
+
+
+
+<div class="check">
+
+<input
+type="checkbox"
+id="bersedia"
+required
+>
+
+<label
+for="bersedia"
+style="margin:0"
+>
+
+Saya bersedia dihubungi untuk
+konfirmasi laporan.
+
+<span class="required">*</span>
+
+</label>
+
+</div>
+
+
+
+<button
+type="submit"
+class="btn"
+id="btnKirim"
+>
+
+📤 Kirim Pengaduan
+
+</button>
+
+
+</form>
+
+
+
+<!-- HASIL -->
+
+<div id="hasil">
+
+<h2>
+✅ Pengaduan Berhasil Dikirim
+</h2>
+
+<p>
+
+Nomor tiket pengaduan Anda:
+
+</p>
+
+<span id="nomorTiket"></span>
+
+<p>
+
+Status:
+<strong>Diterima</strong>
+
+</p>
+
+<p>
+
+Simpan nomor tiket ini untuk
+keperluan pengecekan laporan.
+
+</p>
+
+</div>
+
+
+<a
+href="index.html"
+class="kembali"
+>
+
+← Kembali ke Website Desa
+
+</a>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+// GANTI DENGAN URL APPS SCRIPT ANDA
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbx3LS77uL4ODbk620LI8SAbbxuNqRJKzo2ibfuIBwu3S1COIu0kyjWnYhKdtPKQBBGe/exec";
+
+
+
+const form =
+document.getElementById("formAspirasi");
+
+
+
+form.addEventListener(
+"submit",
+async function(e) {
+
+e.preventDefault();
+
+
+const tombol =
+document.getElementById("btnKirim");
+
+
+tombol.disabled = true;
+
+tombol.innerText =
+"⏳ Mengirim...";
+
+
+
+const sekarang =
+new Date();
+
+
+
+const tahun =
+sekarang.getFullYear();
+
+
+
+const angka =
+Math.floor(
+100000 +
+Math.random() * 900000
+);
+
+
+
+const tiket =
+"SEP-" +
+tahun +
+"-" +
+angka;
+
+
+
+const data = {
+
+tiket: tiket,
+
+tanggalKirim:
+sekarang.toLocaleString("id-ID"),
+
+nama:
+document.getElementById("nama").value,
+
+telepon:
+document.getElementById("telepon").value,
+
+email:
+document.getElementById("email").value,
+
+kecamatan:
+document.getElementById("kecamatan").value,
+
+kabupaten:
+document.getElementById("kabupaten").value,
+
+kategori:
+document.getElementById("kategori").value,
+
+judul:
+document.getElementById("judul").value,
+
+isi:
+document.getElementById("isi").value,
+
+lokasi:
+document.getElementById("lokasi").value,
+
+maps:
+document.getElementById("maps").value,
+
+tanggal:
+document.getElementById("tanggal").value,
+
+waktu:
+document.getElementById("waktu").value,
+
+anonim:
+document.getElementById("anonim").checked,
+
+bersedia:
+document.getElementById("bersedia").checked
+
+};
+
+
+
+try {
+
+
+await fetch(
+SCRIPT_URL,
+{
+
+method: "POST",
+
+mode: "no-cors",
+
+headers: {
+"Content-Type":
+"text/plain"
+},
+
+body:
+JSON.stringify(data)
+
+}
+);
+
+
+
+document.getElementById(
+"nomorTiket"
+).innerText = tiket;
+
+
+
+document.getElementById(
+"hasil"
+).style.display =
+"block";
+
+
+
+form.style.display =
+"none";
+
+
+
+window.scrollTo({
+
+top: 0,
+
+behavior: "smooth"
+
+});
+
+
+}
+
+catch(error) {
+
+alert(
+"Gagal mengirim laporan. Silakan coba lagi."
+);
+
+console.error(error);
+
+tombol.disabled = false;
+
+tombol.innerText =
+"📤 Kirim Pengaduan";
+
+}
+
+});
+
+</script>
+
+
+</body>
+
+</html>
