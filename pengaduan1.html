@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+    Pengaduan Desa | Desa Sepadu
+</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+   ===================================================== */
+
+body {
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    min-height: 100vh;
+
+    color: #23412f;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf8ef,
+            #e0f5ed,
+            #dceefa
+        );
+
+    overflow-x: hidden;
+
+}
+
+
+/* =====================================================
+   BACKGROUND
+   ===================================================== */
+
+.background {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+
+/* =====================================================
+   KUPU-KUPU
+   ===================================================== */
+
+.butterfly {
+
+    position: absolute;
+
+    font-size: 28px;
+
+    opacity: .65;
+
+    animation:
+        terbang linear infinite;
+
+}
+
+
+.butterfly1 {
+
+    top: 15%;
+
+    left: -80px;
+
+    animation-duration: 18s;
+
+}
+
+
+.butterfly2 {
+
+    top: 43%;
+
+    left: -80px;
+
+    animation-duration: 22s;
+
+    animation-delay: 5s;
+
+}
+
+
+.butterfly3 {
+
+    top: 72%;
+
+    left: -80px;
+
+    animation-duration: 20s;
+
+    animation-delay: 8s;
+
+}
+
+
+@keyframes terbang {
+
+    0% {
+
+        transform:
+            translateX(-100px)
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+
+    }
+
+
+    10% {
+
+        opacity: .65;
+
+    }
+
+
+    25% {
+
+        transform:
+            translateX(25vw)
+            translateY(-35px)
+            rotate(8deg);
+
+    }
+
+
+    45% {
+
+        transform:
+            translateX(45vw)
+            translateY(25px)
+            rotate(-8deg);
+
+    }
+
+
+    65% {
+
+        transform:
+            translateX(65vw)
+            translateY(-40px)
+            rotate(8deg);
+
+    }
+
+
+    85% {
+
+        transform:
+            translateX(85vw)
+            translateY(20px)
+            rotate(-5deg);
+
+    }
+
+
+    100% {
+
+        transform:
+            translateX(115vw)
+            translateY(-20px)
+            rotate(5deg);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =====================================================
+   BUNGA
+   ===================================================== */
+
+.flower {
+
+    position: absolute;
+
+    font-size: 28px;
+
+    opacity: .65;
+
+    animation:
+        bunga 5s ease-in-out infinite;
+
+}
+
+
+.flower1 {
+
+    left: 5%;
+
+    top: 20%;
+
+}
+
+
+.flower2 {
+
+    right: 5%;
+
+    top: 25%;
+
+    animation-delay: 1s;
+
+}
+
+
+.flower3 {
+
+    left: 8%;
+
+    bottom: 15%;
+
+    animation-delay: 2s;
+
+}
+
+
+.flower4 {
+
+    right: 8%;
+
+    bottom: 12%;
+
+    animation-delay: 3s;
+
+}
+
+
+@keyframes bunga {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-5deg);
+
+    }
+
+
+    50% {
+
+        transform:
+            translateY(-12px)
+            rotate(5deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+
+header {
+
+    position: relative;
+
+    z-index: 10;
+
+}
+
+
+.navbar {
+
+    min-height: 70px;
+
+    padding:
+        0 6%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background:
+        rgba(18, 67, 37, .96);
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,.08);
+
+}
+
+
+.logo {
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+}
+
+
+.logo span {
+
+    margin-right: 5px;
+
+}
+
+
+.nav-menu {
+
+    display: flex;
+
+    list-style: none;
+
+    gap: 8px;
+
+}
+
+
+.nav-menu a {
+
+    display: block;
+
+    padding:
+        10px 13px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    transition: .3s;
+
+}
+
+
+.nav-menu a:hover,
+.nav-menu a.active {
+
+    background:
+        rgba(255,255,255,.15);
+
+}
+
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.container {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: auto;
+
+    padding:
+        45px 20px 60px;
+
+}
+
+
+/* =====================================================
+   JUDUL
+   ===================================================== */
+
+.page-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.page-header .icon {
+
+    font-size: 45px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.page-header span {
+
+    display: block;
+
+    color: #43805d;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.page-header h1 {
+
+    color: #155d36;
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.page-header p {
+
+    max-width: 650px;
+
+    margin: auto;
+
+    color: #65766c;
+
+    line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   FORM CARD
+   ===================================================== */
+
+.form-card {
+
+    background:
+        rgba(255,255,255,.88);
+
+    backdrop-filter:
+        blur(15px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 28px;
+
+    padding: 32px;
+
+    box-shadow:
+        0 20px 55px
+        rgba(31,90,55,.13);
+
+}
+
+
+/* =====================================================
+   FORM TITLE
+   ===================================================== */
+
+.form-title {
+
+    margin-bottom: 25px;
+
+}
+
+
+.form-title h2 {
+
+    color: #205d3b;
+
+    font-size: 22px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.form-title p {
+
+    color: #718077;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   FORM GROUP
+   ===================================================== */
+
+.form-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #294c38;
+
+    font-weight: 600;
+
+}
+
+
+.required {
+
+    color: #d34b4b;
+
+}
+
+
+.form-group input,
+.form-group textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #d4e4da;
+
+    background:
+        #fbfefc;
+
+    border-radius: 14px;
+
+    padding:
+        14px 16px;
+
+    font-family:
+        inherit;
+
+    font-size: 15px;
+
+    color: #23412f;
+
+    outline: none;
+
+    transition: .3s;
+
+}
+
+
+.form-group input {
+
+    height: 52px;
+
+}
+
+
+.form-group textarea {
+
+    min-height: 145px;
+
+    resize: vertical;
+
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color:
+        #31815b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(49,129,91,.10);
+
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+
+    color: #9aa9a0;
+
+}
+
+
+/* =====================================================
+   CATATAN
+   ===================================================== */
+
+.note {
+
+    background:
+        #eff9f2;
+
+    border-left:
+        4px solid #31815b;
+
+    padding:
+        13px 15px;
+
+    border-radius:
+        8px;
+
+    color:
+        #607368;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.6;
+
+    margin-bottom:
+        22px;
+
+}
+
+
+/* =====================================================
+   BUTTON
+   ===================================================== */
+
+.submit-btn {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 15px;
+
+    padding: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #187047,
+            #258db2
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    box-shadow:
+        0 8px 20px
+        rgba(24,112,71,.18);
+
+}
+
+
+.submit-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(24,112,71,.25);
+
+}
+
+
+.submit-btn:disabled {
+
+    opacity: .7;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+
+/* =====================================================
+   PESAN ERROR
+   ===================================================== */
+
+#errorMessage {
+
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    background:
+        #fff0f0;
+
+    color:
+        #a83c3c;
+
+    text-align: center;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer {
+
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+
+    padding:
+        20px;
+
+    color:
+        #718077;
+
+    font-size:
+        13px;
+
+}
+
+
+/* =====================================================
+   POPUP TERIMA KASIH
+   ===================================================== */
+
+.thanks-popup {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    background:
+        rgba(18,55,38,.50);
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+}
+
+
+.thanks-box {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #effaf3
+        );
+
+    border-radius: 28px;
+
+    padding:
+        35px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.25);
+
+    animation:
+        popupMasuk .5s ease;
+
+}
+
+
+.thanks-icon {
+
+    font-size: 65px;
+
+    margin-bottom: 8px;
+
+    animation:
+        bungaGoyang 2s
+        ease-in-out
+        infinite;
+
+}
+
+
+.thanks-box h2 {
+
+    color:
+        #17633b;
+
+    font-size:
+        25px;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.thanks-box p {
+
+    color:
+        #607368;
+
+    line-height:
+        1.7;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.thanks-id {
+
+    background:
+        #e5f5eb;
+
+    color:
+        #17633b;
+
+    padding:
+        11px;
+
+    border-radius:
+        12px;
+
+    margin-bottom:
+        20px;
+
+    font-weight:
+        bold;
+
+    font-size:
+        14px;
+
+    word-break:
+        break-word;
+
+}
+
+
+.thanks-button {
+
+    width: 100%;
+
+    border: none;
+
+    padding:
+        13px 20px;
+
+    border-radius:
+        14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #187047,
+            #258db2
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: .3s;
+
+}
+
+
+.thanks-button:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+@keyframes popupMasuk {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.75)
+            translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes bungaGoyang {
+
+    0%,
+    100% {
+
+        transform:
+            rotate(-5deg)
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            rotate(5deg)
+            scale(1.08);
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px) {
+
+    .navbar {
+
+        padding:
+            12px 15px;
+
+        flex-direction:
+            column;
+
+        gap: 10px;
+
+    }
+
+
+    .nav-menu {
+
+        width: 100%;
+
+        justify-content:
+            center;
+
+        flex-wrap:
+            wrap;
+
+    }
+
+
+    .nav-menu a {
+
+        padding:
+            7px 9px;
+
+        font-size:
+            12px;
+
+    }
+
+
+    .container {
+
+        padding:
+            30px 12px 45px;
+
+    }
+
+
+    .form-card {
+
+        padding:
+            22px 17px;
+
+        border-radius:
+            22px;
+
+    }
+
+
+    .page-header h1 {
+
+        font-size:
+            26px;
+
+    }
+
+
+    .page-header p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .butterfly {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .flower {
+
+        font-size:
+            22px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND
+     ===================================================== -->
+
+<div
