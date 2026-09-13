@@ -1,0 +1,1138 @@
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Pengaduan - Desa Sepadu</title><style>
+
+/* =====================================================
+   DASAR
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #263b2a;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(116, 221, 161, .25), transparent 28%),
+        radial-gradient(circle at 90% 80%, rgba(94, 188, 255, .22), transparent 30%),
+        linear-gradient(135deg, #eefbf2, #f4fbff, #eef9f3);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   LATAR CAHAYA
+===================================================== */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: .35;
+    z-index: -5;
+    pointer-events: none;
+}
+
+body::before {
+    background: #79dca0;
+    top: 15%;
+    left: -100px;
+    animation: glowMove 8s ease-in-out infinite alternate;
+}
+
+body::after {
+    background: #73c9ff;
+    right: -100px;
+    bottom: 10%;
+    animation: glowMove 10s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes glowMove {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(60px, -40px) scale(1.15);
+    }
+}
+
+
+/* =====================================================
+   KUPU-KUPU
+===================================================== */
+
+.butterfly {
+    position: fixed;
+    z-index: 20;
+    pointer-events: none;
+    font-size: 30px;
+    filter:
+        drop-shadow(0 5px 8px rgba(0,0,0,.15))
+        drop-shadow(0 0 8px rgba(255,255,255,.8));
+
+    animation:
+        butterflyFly 14s ease-in-out infinite,
+        butterflyFloat 1.4s ease-in-out infinite alternate;
+}
+
+.butterfly1 {
+    left: 3%;
+    top: 28%;
+    animation-duration: 16s, 1.2s;
+}
+
+.butterfly2 {
+    right: 5%;
+    top: 45%;
+    font-size: 25px;
+    animation-duration: 19s, 1.5s;
+    animation-delay: 2s, .3s;
+}
+
+.butterfly3 {
+    left: 45%;
+    top: 8%;
+    font-size: 24px;
+    animation-duration: 17s, 1.3s;
+    animation-delay: 4s, .5s;
+}
+
+.butterfly4 {
+    right: 20%;
+    bottom: 8%;
+    font-size: 28px;
+    animation-duration: 21s, 1.6s;
+    animation-delay: 1s, .2s;
+}
+
+@keyframes butterflyFly {
+
+    0% {
+        transform: translate(0, 0) rotate(-8deg);
+    }
+
+    20% {
+        transform: translate(90px, -55px) rotate(12deg);
+    }
+
+    40% {
+        transform: translate(170px, 30px) rotate(-5deg);
+    }
+
+    60% {
+        transform: translate(100px, 100px) rotate(10deg);
+    }
+
+    80% {
+        transform: translate(-30px, 50px) rotate(-12deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(-8deg);
+    }
+}
+
+@keyframes butterflyFloat {
+
+    from {
+        margin-top: -5px;
+    }
+
+    to {
+        margin-top: 8px;
+    }
+}
+
+
+/* =====================================================
+   BUNGA
+===================================================== */
+
+.flower {
+    position: fixed;
+    z-index: 5;
+    pointer-events: none;
+    font-size: 34px;
+    opacity: .85;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,.12));
+
+    animation:
+        flowerFloat 7s ease-in-out infinite,
+        flowerRotate 9s linear infinite;
+}
+
+.flower1 {
+    left: 4%;
+    bottom: 7%;
+}
+
+.flower2 {
+    right: 4%;
+    top: 18%;
+    font-size: 40px;
+    animation-delay: 1s;
+}
+
+.flower3 {
+    left: 20%;
+    top: 13%;
+    font-size: 25px;
+    animation-delay: 2s;
+}
+
+.flower4 {
+    right: 25%;
+    bottom: 4%;
+    font-size: 27px;
+    animation-delay: 3s;
+}
+
+.flower5 {
+    left: 50%;
+    bottom: 12%;
+    font-size: 23px;
+    animation-delay: 1.5s;
+}
+
+@keyframes flowerFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-18px);
+    }
+}
+
+@keyframes flowerRotate {
+
+    0% {
+        rotate: -5deg;
+    }
+
+    50% {
+        rotate: 5deg;
+    }
+
+    100% {
+        rotate: -5deg;
+    }
+}
+
+
+/* =====================================================
+   KELIPAN BINTANG / PETAL
+===================================================== */
+
+.sparkle {
+    position: fixed;
+    z-index: 3;
+    pointer-events: none;
+    font-size: 15px;
+    opacity: .6;
+    animation: sparkle 4s ease-in-out infinite;
+}
+
+.sparkle1 {
+    left: 13%;
+    top: 40%;
+}
+
+.sparkle2 {
+    right: 15%;
+    top: 65%;
+    animation-delay: 1s;
+}
+
+.sparkle3 {
+    left: 70%;
+    top: 20%;
+    animation-delay: 2s;
+}
+
+@keyframes sparkle {
+
+    0%, 100% {
+        opacity: .25;
+        transform: scale(.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    padding: 24px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #075c32,
+            #159052,
+            #168ac2
+        );
+
+    box-shadow:
+        0 8px 30px rgba(0, 80, 50, .22);
+
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    right: 8%;
+    top: -120px;
+}
+
+header::after {
+    content: "🌿  ✿  🌿  ✿  🌿";
+    position: absolute;
+    right: 20px;
+    bottom: 8px;
+    opacity: .15;
+    font-size: 40px;
+}
+
+.header-content {
+    max-width: 1250px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.25);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.12);
+
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+header p {
+    margin: 5px 0 0;
+    opacity: .9;
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+button,
+.btn {
+    border: none;
+    border-radius: 12px;
+    padding: 11px 16px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: .25s ease;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.header-buttons {
+    display: flex;
+    gap: 9px;
+}
+
+.btn-back {
+    background: rgba(255,255,255,.95);
+    color: #176b3a;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+}
+
+.btn-back:hover {
+    background: white;
+}
+
+.logout {
+    background: rgba(180, 35, 55, .95);
+    color: white;
+    box-shadow: 0 5px 15px rgba(100,0,0,.15);
+}
+
+.logout:hover {
+    background: #981f30;
+}
+
+.btn-refresh {
+    color: white;
+    background: linear-gradient(135deg, #176b3a, #1c9c61);
+    box-shadow: 0 7px 18px rgba(23,107,58,.2);
+}
+
+.btn-refresh:hover {
+    box-shadow: 0 10px 24px rgba(23,107,58,.3);
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+    max-width: 1250px;
+    margin: 32px auto;
+    padding: 0 15px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+}
+
+.top-bar h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #174f2d;
+}
+
+.top-bar p {
+    margin-bottom: 0 !important;
+}
+
+
+/* =====================================================
+   STATISTIK
+===================================================== */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+    margin: 22px 0;
+}
+
+.stat-card {
+    position: relative;
+    overflow: hidden;
+
+    background: rgba(255,255,255,.78);
+    backdrop-filter: blur(15px);
+
+    border-radius: 20px;
+    padding: 21px;
+
+    box-shadow:
+        0 10px 30px rgba(30,90,55,.09);
+
+    border: 1px solid rgba(255,255,255,.8);
+
+    transition: .3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 16px 35px rgba(30,90,55,.14);
+}
+
+.stat-card::after {
+    content: "✿";
+    position: absolute;
+    right: 18px;
+    bottom: 5px;
+    font-size: 45px;
+    opacity: .08;
+}
+
+.stat-card:nth-child(1) {
+    border-left: 5px solid #159052;
+}
+
+.stat-card:nth-child(2) {
+    border-left: 5px solid #e7a72e;
+}
+
+.stat-card:nth-child(3) {
+    border-left: 5px solid #36a866;
+}
+
+.stat-title {
+    color: #68736b;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: 800;
+    color: #176b3a;
+}
+
+
+/* =====================================================
+   PESAN
+===================================================== */
+
+#pesan {
+    margin-bottom: 15px;
+}
+
+.error,
+.success {
+    padding: 14px 17px;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.05);
+    animation: messageIn .35s ease;
+}
+
+.error {
+    background: #ffe7e9;
+    color: #a00000;
+    border: 1px solid #ffc8cd;
+}
+
+.success {
+    background: #e5f8eb;
+    color: #176b3a;
+    border: 1px solid #bfe9cc;
+}
+
+@keyframes messageIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrapper {
+    overflow-x: auto;
+
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(16px);
+
+    border-radius: 21px;
+
+    box-shadow:
+        0 12px 35px rgba(30,90,55,.1);
+
+    border: 1px solid rgba(255,255,255,.9);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1150px;
+}
+
+thead th {
+    background:
+        linear-gradient(
+            135deg,
+            #11693a,
+            #1b9560,
+            #197fae
+        );
+
+    color: white;
+
+    padding: 16px 12px;
+
+    text-align: left;
+
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+tbody td {
+    padding: 15px 12px;
+
+    border-bottom: 1px solid #eaf0eb;
+
+    vertical-align: top;
+
+    font-size: 14px;
+}
+
+tbody tr {
+    transition: .25s ease;
+}
+
+tbody tr:hover {
+    background: linear-gradient(
+        90deg,
+        rgba(228,248,235,.8),
+        rgba(237,249,255,.8)
+    );
+    transform: scale(1.002);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =====================================================
+   ID
+===================================================== */
+
+.id-badge {
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e5f8ec,
+            #e4f5fb
+        );
+
+    color: #176b3a;
+
+    padding: 7px 10px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    border: 1px solid #cdebd8;
+}
+
+
+/* =====================================================
+   JUDUL
+===================================================== */
+
+.judul {
+    font-weight: 700;
+    color: #174f2d;
+    min-width: 180px;
+}
+
+
+/* =====================================================
+   DESKRIPSI
+===================================================== */
+
+.description {
+    max-width: 280px;
+    min-width: 240px;
+
+    line-height: 1.55;
+
+    color: #56625a;
+
+    white-space: normal;
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+.contact {
+    white-space: nowrap;
+    color: #344139;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-select {
+    padding: 9px 11px;
+
+    border-radius: 10px;
+
+    border: 1px solid #cbd9d0;
+
+    background: #fff;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    min-width: 150px;
+
+    color: #31553e;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.04);
+
+    transition: .2s;
+}
+
+.status-select:hover {
+    border-color: #70bb8e;
+}
+
+.status-select:focus {
+    outline: none;
+
+    border-color: #55a875;
+
+    box-shadow:
+        0 0 0 3px rgba(80,180,120,.15);
+}
+
+
+/* =====================================================
+   ACTION
+===================================================== */
+
+.actions {
+    display: flex;
+    gap: 7px;
+    flex-direction: column;
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #df3f51, #bd2639);
+    color: white;
+
+    box-shadow:
+        0 5px 12px rgba(190,30,50,.18);
+}
+
+.btn-delete:hover {
+    background: linear-gradient(135deg, #c92f42, #a91e31);
+}
+
+
+/* =====================================================
+   LOADING / EMPTY
+===================================================== */
+
+.loading,
+.empty {
+    text-align: center;
+    padding: 45px;
+    color: #718078;
+}
+
+.loading {
+    font-size: 15px;
+}
+
+.loading::first-letter {
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    text-align: center;
+    padding: 25px 15px 35px;
+    color: #718078;
+    font-size: 13px;
+}
+
+.footer span {
+    color: #159052;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    header {
+        border-radius: 0 0 22px 22px;
+        padding: 20px 15px;
+    }
+
+    .header-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header-buttons {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+    }
+
+    .header-buttons a,
+    .header-buttons button {
+        flex: 1;
+        text-align: center;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .top-bar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .btn-refresh {
+        width: 100%;
+    }
+
+    .butterfly {
+        font-size: 23px;
+    }
+
+    .flower {
+        font-size: 25px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+}
+
+
+/* =====================================================
+   KURANGI ANIMASI JIKA USER MEMILIH REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+</style></head><body><!-- =====================================================
+     DEKORASI BUNGA & KUPU-KUPU
+===================================================== --><div class="butterfly butterfly1">🦋</div>
+<div class="butterfly butterfly2">🦋</div>
+<div class="butterfly butterfly3">🦋</div>
+<div class="butterfly butterfly4">🦋</div><div class="flower flower1">🌸</div>
+<div class="flower flower2">🌺</div>
+<div class="flower flower3">🌼</div>
+<div class="flower flower4">🌷</div>
+<div class="flower flower5">🌸</div><div class="sparkle sparkle1">✦</div>
+<div class="sparkle sparkle2">✧</div>
+<div class="sparkle sparkle3">✦</div><!-- =====================================================
+     HEADER
+===================================================== --><header><div class="header-content"><div class="brand">
+
+    <div class="logo">
+        🌿
+    </div>
+
+    <div>
+
+        <h1>
+            Admin Pengaduan Desa Sepadu
+        </h1>
+
+        <p>
+            Kelola Aspirasi & Pengaduan Masyarakat
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="header-buttons">
+
+    <a href="index.html" class="btn btn-back">
+        ← Kembali
+    </a>
+
+    <button
+        class="logout"
+        onclick="logoutAdmin()">
+
+        Keluar
+
+    </button>
+
+</div>
+
+</div></header><!-- =====================================================
+     KONTEN
+===================================================== --><div class="container"><div class="top-bar"><div>
+
+    <h2>
+        📋 Data Pengaduan Masyarakat
+    </h2>
+
+    <p style="color:#777;margin-top:6px;">
+        Kelola dan perbarui status pengaduan masyarakat dengan mudah.
+    </p>
+
+</div>
+
+
+<button
+    class="btn-refresh"
+    onclick="ambilData()">
+
+    🔄 Refresh Data
+
+</button>
+
+</div><!-- =====================================================
+     STATISTIK
+===================================================== --><div class="stats"><div class="stat-card">
+
+    <div class="stat-title">
+        Total Pengaduan
+    </div>
+
+    <div
+        class="stat-number"
+        id="jumlahData">
+
+        0
+
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-title">
+        Menunggu
+    </div>
+
+    <div
+        class="stat-number"
+        id="jumlahMenunggu">
+
+        0
+
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-title">
+        Selesai
+    </div>
+
+    <div
+        class="stat-number"
+        id="jumlahSelesai">
+
+        0
+
+    </div>
+
+</div>
+
+</div><div id="pesan"></div><!-- =====================================================
+     TABLE
+===================================================== --><div class="table-wrapper"><table><thead><tr><th>No</th>
+<th>ID Pengaduan</th>
+<th>Nama Pelapor</th>
+<th>No HP / WA</th>
+<th>Judul</th>
+<th>Deskripsi</th>
+<th>Status</th>
+<th>Tanggal</th>
+<th>Aksi</th></tr></thead><tbody id="dataPengaduan"><tr><td colspan="9" class="loading">⏳ Mengambil data pengaduan...
+
+</td></tr></tbody></table></div></div><!-- =====================================================
+     FOOTER
+===================================================== --><div class="footer">🌿 <span>Desa Sepadu</span>
+• Sistem Aspirasi & Pengaduan Masyarakat
+🌸
+
+</div><script>
+
+
+// =====================================================
+// URL GOOGLE APPS SCRIPT
+// =====================================================
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwdPAd4go9Z7ETCT1bLvqJohBafvanU3ZSJFrKWxEpyWRoPoldE7ZJnB8bwy4I8xBSjKQ/exec";
+
+
+// =====================================================
+// CEK LOGIN
+// =====================================================
+
+if (sessionStorage.getItem("adminLogin") !== "true") {
+
+    window.location.href = "loginadmin.html";
+
+}
+
+
+// =====================================================
+// FUNGSI MENGAMBIL FIELD
+// =====================================================
+
+function ambilField(item, daftarNama) {
+
+    for (const nama of daftarNama) {
+
+        if (
+            item[nama] !== undefined &&
+            item[nama] !== null &&
+            item[nama] !== ""
+        ) {
+
+            return item[nama];
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+// =====================================================
+// AMBIL DATA
+// =====================================================
+
+async function ambilData() {
+
+    const tabel =
+        document.getElementById("dataPengaduan");
+
+    tabel.innerHTML = `
+        <tr>
+            <td colspan="9" class="loading">
+                🦋 Mengambil data pengaduan...
+            </td>
+        </tr>
+    `;
+
+    document.getElementById("pesan").innerHTML = "";
+
+
+    try {
+
+        const response =
+            await fetch(SCRIPT_URL);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Gagal terhubung ke Google Apps Script."
+            );
+
+        }
+
+
+        const hasil =
+            await response.json();
+
+
+        console.log(
+            "DATA DARI GOOGLE APPS SCRIPT:",
+            hasil
+        );
+
+
+        if (!hasil.success) {
+
+            throw new Error(
+                hasil.message ||
+                "Gagal mengambil data."
+            );
+
+        }
+
+
+        const data 
