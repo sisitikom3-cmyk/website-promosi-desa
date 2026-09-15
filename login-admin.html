@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login Admin | Desa Sepadu</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #063d2a,
+                    #08745b,
+                    #1686a0
+                );
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .login-card {
+            background: rgba(255,255,255,0.97);
+            padding: 40px 35px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #16865c,
+                    #1685a0
+                );
+
+            font-size: 38px;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.18);
+        }
+
+        h1 {
+            color: #124f3b;
+            font-size: 29px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #315345;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 15px;
+
+            border: 1px solid #d7dedb;
+            border-radius: 12px;
+
+            outline: none;
+            font-size: 15px;
+
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #16865c;
+
+            box-shadow:
+                0 0 0 3px rgba(22,134,92,0.12);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #16865c,
+                    #1685a0
+                );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(22,134,92,0.3);
+        }
+
+        .error {
+            display: none;
+
+            margin-top: 18px;
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background: #ffe8e8;
+            color: #c0392b;
+
+            font-size: 14px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+
+            color: #16865c;
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+        }
+
+        @media(max-width:500px) {
+
+            .login-card {
+                padding: 32px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <div class="logo">
+            🌿
+        </div>
+
+        <h1>
+            Login Admin
+        </h1>
+
+        <p class="subtitle">
+            Dashboard Pengaduan Desa Sepadu
+        </p>
+
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="username">
+                    Nama Admin
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Masukkan nama admin"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Kata Sandi
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Masukkan kata sandi"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+                🔐 Masuk ke Dashboard
+            </button>
+
+
+            <div
+                id="errorMessage"
+                class="error"
+            >
+                Nama admin atau kata sandi salah.
+            </div>
+
+        </form>
+
+
+        <a
+            href="index.html"
+            class="back"
+        >
+            ← Kembali ke Website Desa
+        </a>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 Desa Sepadu
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ==========================================
+       DATA LOGIN ADMIN
+       ========================================== */
+
+    const ADMIN_USERNAME = "Siti";
+    const ADMIN_PASSWORD = "sisisi";
+
+
+    /* ==========================================
+       PROSES LOGIN
+       ========================================== */
+
+    document
+        .getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const username =
+                document
+                .getElementById("username")
+                .value
+                .trim();
+
+
+            const password =
+                document
+                .getElementById("password")
+                .value;
+
+
+            const errorMessage =
+                document
+                .getElementById("errorMessage");
+
+
+            /* CEK USERNAME DAN PASSWORD */
+
+            if (
+                username === ADMIN_USERNAME &&
+                password === ADMIN_PASSWORD
+            ) {
+
+                /* SIMPAN STATUS LOGIN */
+
+                sessionStorage.setItem(
+                    "adminLogin",
+                    "true"
+                );
+
+
+                sessionStorage.setItem(
+                    "adminName",
+                    username
+                );
+
+
+                /* PINDAH KE ADMIN */
+
+                window.location.href =
+                    "admin.html";
+
+            } else {
+
+                errorMessage.style.display =
+                    "block";
+
+            }
+
+        });
+
+</script>
+
+</body>
+</html>
