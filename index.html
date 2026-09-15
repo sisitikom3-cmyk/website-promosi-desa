@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Tanggapan Pengaduan | Desa Sepadu</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    color: #203f2d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf8ef,
+            #e0f5ed,
+            #dceefa
+        );
+
+    overflow-x: hidden;
+}
+
+/* ==============================
+   BACKGROUND
+   ============================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.butterfly {
+    position: absolute;
+    font-size: 31px;
+
+    animation:
+        terbang 16s linear infinite;
+}
+
+.butterfly1 {
+    top: 12%;
+    left: -80px;
+}
+
+.butterfly2 {
+    top: 42%;
+    left: -100px;
+    animation-delay: 4s;
+    animation-duration: 19s;
+}
+
+.butterfly3 {
+    top: 72%;
+    left: -100px;
+    animation-delay: 7s;
+    animation-duration: 17s;
+}
+
+@keyframes terbang {
+
+    0% {
+        transform:
+            translate(-100px, 0)
+            rotate(0deg);
+    }
+
+    20% {
+        transform:
+            translate(20vw, -35px)
+            rotate(10deg);
+    }
+
+    40% {
+        transform:
+            translate(40vw, 30px)
+            rotate(-8deg);
+    }
+
+    60% {
+        transform:
+            translate(65vw, -40px)
+            rotate(8deg);
+    }
+
+    80% {
+        transform:
+            translate(85vw, 30px)
+            rotate(-5deg);
+    }
+
+    100% {
+        transform:
+            translate(110vw, -20px)
+            rotate(5deg);
+    }
+}
+
+/* ==============================
+   FLOWER
+   ============================== */
+
+.flower {
+    position: absolute;
+    font-size: 30px;
+    animation: bunga 5s ease-in-out infinite;
+    opacity: .75;
+}
+
+.flower1 {
+    left: 5%;
+    top: 25%;
+}
+
+.flower2 {
+    right: 5%;
+    top: 20%;
+    animation-delay: 1s;
+}
+
+.flower3 {
+    left: 10%;
+    bottom: 15%;
+    animation-delay: 2s;
+}
+
+.flower4 {
+    right: 12%;
+    bottom: 10%;
+    animation-delay: 3s;
+}
+
+@keyframes bunga {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    50% {
+        transform:
+            translateY(-14px)
+            rotate(8deg);
+    }
+}
+
+/* ==============================
+   CONTAINER
+   ============================== */
+
+.container {
+    position: relative;
+    z-index: 5;
+
+    max-width: 850px;
+    width: 100%;
+
+    margin: auto;
+
+    padding:
+        30px 18px 40px;
+}
+
+/* ==============================
+   HEADER
+   ============================== */
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    font-size: 50px;
+    margin-bottom: 5px;
+}
+
+.header h1 {
+    color: #155d36;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #63776a;
+    font-size: 15px;
+}
+
+/* ==============================
+   CARD
+   ============================== */
+
+.card {
+    background:
+        rgba(255,255,255,.90);
+
+    backdrop-filter:
+        blur(15px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 26px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(31,90,55,.13);
+}
+
+/* ==============================
+   INTRO
+   ============================== */
+
+.intro {
+    background:
+        linear-gradient(
+            135deg,
+            #effaf2,
+            #eaf6fb
+        );
+
+    border-left:
+        5px solid #24875d;
+
+    border-radius: 13px;
+
+    padding:
+        16px 18px;
+
+    margin-bottom: 25px;
+
+    color: #4e6557;
+
+    line-height: 1.7;
+}
+
+/* ==============================
+   FORM
+   ============================== */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+
+    font-weight: 700;
+
+    color: #214f36;
+
+    margin-bottom: 8px;
+
+    font-size: 15px;
+}
+
+input {
+    width: 100%;
+
+    min-height: 54px;
+
+    border:
+        1px solid #d5e3da;
+
+    border-radius: 15px;
+
+    padding:
+        14px 15px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    color: #243d2d;
+
+    background:
+        rgba(255,255,255,.95);
+
+    outline: none;
+
+    transition: .3s;
+}
+
+input:focus {
+    border-color:
+        #24875d;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(36,135,93,.10);
+}
+
+/* ==============================
+   BUTTON
+   ============================== */
+
+.check-button {
+    width: 100%;
+
+    border: none;
+
+    border-radius: 15px;
+
+    padding: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176f47,
+            #268fb1
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.check-button:hover {
+    transform:
+        translateY(-2px);
+}
+
+.check-button:disabled {
+    opacity: .7;
+    cursor: not-allowed;
+}
+
+/* ==============================
+   HASIL
+   ============================== */
+
+#hasil {
+    display: none;
+
+    margin-top: 25px;
+}
+
+/* ==============================
+   TIKET
+   ============================== */
+
+.ticket-box {
+    background:
+        #f1faf5;
+
+    border:
+        1px solid #d4eadc;
+
+    border-radius: 16px;
+
+    padding: 18px;
+
+    margin-bottom: 18px;
+}
+
+.ticket-box small {
+    color: #718077;
+}
+
+.ticket-box h2 {
+    color: #17633b;
+
+    margin-top: 5px;
+
+    font-size: 22px;
+
+    letter-spacing: 1px;
+}
+
+/* ==============================
+   DATA
+   ============================== */
+
+.data-box {
+    border:
+        1px solid #e0e8e3;
+
+    border-radius: 16px;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+
+    background: white;
+}
+
+.data-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 11px 0;
+
+    border-bottom:
+        1px solid #edf1ee;
+}
+
+.data-row:last-child {
+    border-bottom: none;
+}
+
+.data-label {
+    font-weight: 700;
+    color: #426050;
+}
+
+.data-value {
+    text-align: right;
+    color: #253e30;
+}
+
+/* ==============================
+   STATUS
+   ============================== */
+
+.status {
+    display: inline-block;
+
+    padding:
+        7px 14px;
+
+    border-radius: 30px;
+
+    font-weight: 700;
+
+    font-size: 13px;
+}
+
+.status-menunggu {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-proses {
+    background: #dceeff;
+    color: #17608a;
+}
+
+.status-selesai {
+    background: #dff5e5;
+    color: #176b3a;
+}
+
+/* ==============================
+   TANGGAPAN
+   ============================== */
+
+.tanggapan-box {
+    background:
+        linear-gradient(
+            135deg,
+            #effaf2,
+            #edf8fb
+        );
+
+    border-left:
+        5px solid #268fb1;
+
+    border-radius: 15px;
+
+    padding: 18px;
+
+    margin-top: 18px;
+}
+
+.tanggapan-box h3 {
+    color: #17633b;
+
+    margin-bottom: 10px;
+}
+
+.tanggapan-box p {
+    color: #53685b;
+
+    line-height: 1.7;
+
+    white-space: pre-line;
+}
+
+/* ==============================
+   PESAN ERROR
+   ============================== */
+
+.error {
+    display: none;
+
+    background: #fff0f0;
+
+    color: #b33a3a;
+
+    border:
+        1px solid #f0caca;
+
+    border-radius: 13px;
+
+    padding: 14px;
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    line-height: 1.6;
+}
+
+/* ==============================
+   FOOTER
+   ============================== */
+
+.footer {
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #63776a;
+
+    font-size: 13px;
+}
+
+/* ==============================
+   MOBILE
+   ============================== */
+
+@media(max-width:600px) {
+
+    .container {
+        padding:
+            20px 10px 30px;
+    }
+
+    .card {
+        padding:
+            20px 17px;
+
+        border-radius: 21px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .logo {
+        font-size: 42px;
+    }
+
+    .intro {
+        font-size: 14px;
+        padding: 14px;
+    }
+
+    input {
+        font-size: 14px;
+    }
+
+    .data-row {
+        display: block;
+    }
+
+    .data-value {
+        text-align: left;
+        margin-top: 4px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==============================
+     BACKGROUND
+     ============================== -->
+
+<div class="background">
+
+    <div class="butterfly butterfly1">
+        🦋
+    </div>
+
+    <div class="butterfly butterfly2">
+        🦋
+    </div>
+
+    <div class="butterfly butterfly3">
+        🦋
+    </div>
+
+    <div class="flower flower1">
+        🌸
+    </div>
+
+    <div class="flower flower2">
+        🌺
+    </div>
+
+    <div class="flower flower3">
+        🌼
+    </div>
+
+    <div class="flower flower4">
+        🌷
+    </div>
+
+</div>
+
+
+<!-- ==============================
+     CONTAINER
+     ============================== -->
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">
+            🌿
+        </div>
+
+        <h1>
+            Tanggapan Pengaduan
+        </h1>
+
+        <p>
+            Desa Sepadu • Dusun Semayang
+        </p>
+
+    </div>
+
+
+    <!-- CARD -->
+
+    <div class="card">
+
+
+        <!-- INTRO -->
+
+        <div class="intro">
+
+            Masukkan <b>Nomor Tiket Pengaduan</b>
+            yang Anda terima setelah mengirim
+            pengaduan.
+
+            <br>
+
+            Anda dapat melihat status pengaduan
+            dan tanggapan dari petugas Desa Sepadu.
+
+        </div>
+
+
+        <!-- FORM CEK -->
+
+        <div class="form-group">
+
+            <label for="tiket">
+
+                Nomor Tiket Pengaduan
+
+            </label>
+
+            <input
+                type="text"
+                id="tiket"
+                placeholder="Contoh: TKT-001"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <button
+            class="check-button"
+            id="checkButton"
+            onclick="cekPengaduan()"
+        >
+
+            🔎 Cek Pengaduan
+
+        </button>
+
+
+        <!-- ERROR -->
+
+        <div
+            class="error"
+            id="errorBox"
+        ></div>
+
+
+        <!-- HASIL -->
+
+        <div id="hasil">
+
+
+            <!-- NOMOR TIKET -->
+
+            <div class="ticket-box">
+
+                <small>
+                    Nomor Tiket
+                </small>
+
+                <h2 id="hasilTiket">
+                    -
+                </h2>
+
+            </div>
+
+
+            <!-- DATA -->
+
+            <div class="data-box">
+
+
+                <div class="data-row">
+
+                    <div class="data-label">
+                        Nama
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="hasilNama"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <div class="data-label">
+                        Judul Pengaduan
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="hasilJudul"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <div class="data-label">
+                        Tanggal
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="hasilTanggal"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <div class="data-label">
+                        Status
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="hasilStatus"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- DESKRIPSI -->
+
+            <div class="data-box">
+
+                <div class="data-label">
+                    Deskripsi Pengaduan
+                </div>
+
+                <p
+                    id="hasilDeskripsi"
+                    style="
+                        margin-top:10px;
+                        color:#53685b;
+                        line-height:1.7;
+                    "
+                >
+                    -
+                </p>
+
+            </div>
+
+
+            <!-- TANGGAPAN ADMIN -->
+
+            <div class="tanggapan-box">
+
+                <h3>
+                    💬 Tanggapan Petugas
+                </h3>
+
+                <p id="hasilTanggapan">
+                    Belum ada tanggapan dari petugas.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        🌸 Website Desa Sepadu — Dusun Semayang 🌸
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   URL GOOGLE APPS SCRIPT
+   ===================================================== */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbzTCoqlRNrkUA14uSr7TtjyacWNlYz4M5g8ZbKJFDlAdiboDV_LEI-s_-CGNUo4NGCBLA/exec";
+
+
+/* =====================================================
+   CEK PENGADUAN
+   ===================================================== */
+
+async function cekPengaduan() {
+
+    const tiket =
+        document
+            .getElementById("tiket")
+            .value
+            .trim();
+
+    const button =
+        document
+            .getElementById("checkButton");
+
+    const errorBox =
+        document
+            .getElementById("errorBox");
+
+    const hasil =
+        document
+            .getElementById("hasil");
+
+
+    /* VALIDASI */
+
+    if (!tiket) {
+
+        errorBox.innerHTML =
+            "❌ Silakan masukkan nomor tiket pengaduan.";
+
+        errorBox.style.display =
+            "block";
+
+        hasil.style.display =
+            "none";
+
+        return;
+    }
+
+
+    /* LOADING */
+
+    button.disabled =
+        true;
+
+    button.innerHTML =
+        "⏳ Mencari data...";
+
+    errorBox.style.display =
+        "none";
+
+
+    try {
+
+
+        /*
+         * Meminta data pengaduan
+         * dari Google Apps Script.
+         */
+
+        const response =
+            await fetch(
+                SCRIPT_URL +
+                "?action=cek&tiket=" +
+                encodeURIComponent(tiket)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        /* DATA TIDAK DITEMUKAN */
+
+        if (
+            !data.success ||
+            !data.data
+        ) {
+
+            throw new Error(
+                "Nomor tiket tidak ditemukan."
+            );
+
+        }
+
+
+        const pengaduan =
+            data.data;
+
+
+        /* ==========================
+           TAMPILKAN DATA
+           ========================== */
+
+        document
+            .getElementById("hasilTiket")
+            .textContent =
+                pengaduan.tiket || tiket;
+
+
+        document
+            .getElementById("hasilNama")
+            .textContent =
+                pengaduan.nama || "-";
+
+
+        document
+            .getElementById("hasilJudul")
+            .textContent =
+                pengaduan.judul || "-";
+
+
+        document
+            .getElementById("hasilTanggal")
+            .textContent =
+                pengaduan.tanggal || "-";
+
+
+        document
+            .getElementById("hasilDeskripsi")
+            .textContent =
+                pengaduan.deskripsi || "-";
+
+
+        document
+            .getElementById("hasilTanggapan")
+            .textContent =
+                pengaduan.tanggapan ||
+                "Belum ada tanggapan dari petugas.";
+
+
+        /* ==========================
+           STATUS
+           ========================== */
+
+        const statusElement =
+            document
+                .getElementById("hasilStatus");
+
+
+        const status =
+            (
+                pengaduan.status ||
+                "Menunggu"
+            ).toLowerCase();
+
+
+        statusElement.innerHTML =
+            "";
+
+
+        const statusBadge =
+            document.createElement("span");
+
+
+        statusBadge.classList.add(
+            "status"
+        );
+
+
+        if (
+            status.includes("selesai")
+        ) {
+
+            statusBadge.classList.add(
+                "status-selesai"
+            );
+
+        }
+
+        else if (
+            status.includes("proses")
+        ) {
+
+            statusBadge.classList.add(
+                "status-proses"
+            );
+
+        }
+
+        else {
+
+            statusBadge.classList.add(
+                "status-menunggu"
+            );
+
+        }
+
+
+        statusBadge.textContent =
+            pengaduan.status ||
+            "Menunggu";
+
+
+        statusElement.appendChild(
+            statusBadge
+        );
+
+
+        /* TAMPILKAN HASIL */
+
+        hasil.style.display =
+            "block";
+
+
+        hasil.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+    }
+
+    catch (error) {
+
+        errorBox.innerHTML =
+            "❌ " +
+            error.message +
+            "<br><br>" +
+            "Pastikan nomor tiket yang dimasukkan benar.";
+
+        errorBox.style.display =
+            "block";
+
+        hasil.style.display =
+            "none";
+
+    }
+
+    finally {
+
+        button.disabled =
+            false;
+
+        button.innerHTML =
+            "🔎 Cek Pengaduan";
+
+    }
+
+}
+
+
+/* =====================================================
+   ENTER UNTUK CEK
+   ===================================================== */
+
+document
+    .getElementById("tiket")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                cekPengaduan();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>
