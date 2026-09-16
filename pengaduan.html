@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Aspirasi & Pengaduan - Desa Sepadu</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f8f3;
+    color: #263b2a;
+}
+
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+    text-align: center;
+    color: #176b3a;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: #176b3a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0f542c;
+}
+
+#hasil {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #e9f7ed;
+    border-radius: 10px;
+}
+
+#hasil h3 {
+    color: #176b3a;
+}
+
+.tiket {
+    font-size: 22px;
+    font-weight: bold;
+    color: #176b3a;
+    letter-spacing: 1px;
+}
+
+.loading {
+    text-align: center;
+    display: none;
+    margin-top: 15px;
+    color: #176b3a;
+    font-weight: bold;
+}
+
+.error {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #ffebee;
+    color: #c62828;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Aspirasi & Pengaduan</h1>
+
+<p class="subtitle">
+Sampaikan aspirasi atau pengaduan Anda kepada Desa Sepadu.
+Data yang lengkap membantu pengaduan diproses dengan cepat dan jelas.
+</p>
+
+
+<form id="formPengaduan">
+
+
+<label>
+Nama Lengkap
+</label>
+
+<input
+    type="text"
+    id="nama"
+    placeholder="Masukkan nama lengkap"
+    required
+>
+
+
+<label>
+No HP / WhatsApp
+</label>
+
+<input
+    type="tel"
+    id="nohp"
+    placeholder="Contoh: 081234567890"
+    required
+>
+
+
+<label>
+Judul Pengaduan
+</label>
+
+<input
+    type="text"
+    id="judul"
+    placeholder="Contoh: Jalan depan sekolah berlubang"
+    required
+>
+
+
+<label>
+Kategori
+</label>
+
+<select id="kategori" required>
+
+    <option value="">
+        -- Pilih Kategori --
+    </option>
+
+    <option value="Infrastruktur">
+        Infrastruktur
+    </option>
+
+    <option value="Kesehatan">
+        Kesehatan
+    </option>
+
+    <option value="Pendidikan">
+        Pendidikan
+    </option>
+
+    <option value="Lingkungan">
+        Lingkungan
+    </option>
+
+    <option value="Jerebu">
+        Jerebu
+    </option>
+
+    <option value="Jalan Rusak">
+        Jalan Rusak
+    </option>
+
+    <option value="Lainnya">
+        Lainnya
+    </option>
+
+</select>
+
+
+<label>
+Deskripsi Pengaduan
+</label>
+
+<textarea
+    id="deskripsi"
+    placeholder="Jelaskan pengaduan secara lengkap..."
+    required
+></textarea>
+
+
+<button
+    type="submit"
+    id="btnKirim"
+>
+    Kirim Pengaduan
+</button>
+
+
+</form>
+
+
+<div
+    class="loading"
+    id="loading"
+>
+    Mengirim pengaduan...
+</div>
+
+
+<div
+    class="error"
+    id="error"
+></div>
+
+
+<div id="hasil">
+
+    <h3>
+        ✅ Pengaduan Berhasil Dikirim
+    </h3>
+
+    <p>
+        Pengaduan Anda berhasil dikirim.
+        Simpan nomor tiket berikut untuk mengecek
+        status dan tanggapan pengaduan.
+    </p>
+
+    <p>
+        <strong>Nomor Tiket:</strong>
+    </p>
+
+    <span
+        class="tiket"
+        id="nomorTiket"
+    >
+        -
+    </span>
+
+    <p>
+        <strong>Status:</strong>
+        <span id="statusPengaduan">
+            Menunggu
+        </span>
+    </p>
+
+
+    <button
+        onclick="location.reload()"
+    >
+        Kirim Pengaduan Baru
+    </button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// =====================================================
+// URL GOOGLE APPS SCRIPT
+// =====================================================
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbz6sETq3LEHE-savA7beCu1ArRD0suF63miWzxtQaiGdBBEoxw7MY6u93MXi6fzSqFjRA/exec";
+
+
+// =====================================================
+// FORM PENGADUAN
+// =====================================================
+
+document
+.getElementById("formPengaduan")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+
+    const loading =
+        document.getElementById("loading");
+
+    const errorBox =
+        document.getElementById("error");
+
+    const button =
+        document.getElementById("btnKirim");
+
+
+    // Bersihkan pesan error
+
+    errorBox.style.display = "none";
+
+    errorBox.textContent = "";
+
+
+    // Tampilkan loading
+
+    loading.style.display = "block";
+
+    button.disabled = true;
+
+    button.textContent =
+        "Mengirim...";
+
+
+    // =================================================
+    // AMBIL DATA FORM
+    // =================================================
+
+    const nama =
+        document
+        .getElementById("nama")
+        .value
+        .trim();
+
+
+    const nohp =
+        document
+        .getElementById("nohp")
+        .value
+        .trim();
+
+
+    const judul =
+        document
+        .getElementById("judul")
+        .value
+        .trim();
+
+
+    const kategori =
+        document
+        .getElementById("kategori")
+        .value;
+
+
+    const deskripsi =
+        document
+        .getElementById("deskripsi")
+        .value
+        .trim();
+
+
+    // =================================================
+    // DATA YANG DIKIRIM
+    // =================================================
+
+    const data = {
+
+        nama: nama,
+
+        nohp: nohp,
+
+        judul: judul,
+
+        kategori: kategori,
+
+        deskripsi:
+            "Kategori: " +
+            kategori +
+            "\n\n" +
+            deskripsi
+
+    };
+
+
+    try {
+
+
+        // =================================================
+        // KIRIM KE GOOGLE APPS SCRIPT
+        // =================================================
+
+        const response =
+            await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                        JSON.stringify(data)
+                }
+            );
+
+
+        // =================================================
+        // BACA RESPONSE SEBAGAI TEXT DULU
+        // =================================================
+
+        const text =
+            await response.text();
+
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(text);
+
+        } catch (jsonError) {
+
+            console.log(
+                "Response Google Script:",
+                text
+            );
+
+            throw new Error(
+                "Google Script tidak mengembalikan JSON. " +
+                "Pastikan Web App sudah di-deploy ulang."
+            );
+
+        }
+
+
+        // =================================================
+        // JIKA GAGAL
+        // =================================================
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message ||
+                "Pengaduan gagal dikirim."
+            );
+
+        }
+
+
+        // =================================================
+        // VALIDASI FORMAT TIKET
+        // =================================================
+
+        const tiket =
+            result.tiket || "";
+
+
+        // Format yang diharapkan:
+        // TKT-20260916HHMMSS
+
+        const formatTiket =
+            /^TKT-\d{14}$/;
+
+
+        if (
+            !formatTiket.test(tiket)
+        ) {
+
+            throw new Error(
+                "Nomor tiket yang diterima tidak sesuai format TKT-YYYYMMDDHHMMSS: " +
+                tiket
+            );
+
+        }
+
+
+        // =================================================
+        // TAMPILKAN HASIL
+        // =================================================
+
+        document
+        .getElementById("nomorTiket")
+        .textContent =
+            tiket;
+
+
+        document
+        .getElementById("statusPengaduan")
+        .textContent =
+            result.status ||
+            "Menunggu";
+
+
+        // Sembunyikan form
+
+        document
+        .getElementById("formPengaduan")
+        .style.display =
+            "none";
+
+
+        // Tampilkan hasil
+
+        document
+        .getElementById("hasil")
+        .style.display =
+            "block";
+
+
+    } catch (error) {
+
+
+        errorBox.textContent =
+            "❌ " +
+            error.message;
+
+
+        errorBox.style.display =
+            "block";
+
+
+    } finally {
+
+
+        loading.style.display =
+            "none";
+
+        button.disabled = false;
+
+        button.textContent =
+            "Kirim Pengaduan";
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>
