@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tanggapan Pengaduan - Desa Sepadu</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf8ef,
+            #dff4eb,
+            #dceefa
+        );
+
+    color: #23402e;
+    min-height: 100vh;
+
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    font-size: 50px;
+}
+
+.header h1 {
+    color: #176b3a;
+    margin: 5px 0;
+}
+
+.header p {
+    color: #607568;
+}
+
+.card {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.10);
+
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    color: #245339;
+}
+
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #d5e3da;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+input:focus {
+    border-color: #24875d;
+}
+
+button {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176f47,
+            #268fb1
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .7;
+}
+
+
+/* =========================
+   HASIL
+========================= */
+
+#hasil {
+    display: none;
+}
+
+.data {
+    margin-bottom: 15px;
+}
+
+.data-label {
+    font-size: 13px;
+
+    color: #718078;
+
+    margin-bottom: 5px;
+}
+
+.data-value {
+    font-size: 16px;
+
+    font-weight: 500;
+
+    word-wrap: break-word;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status-box {
+    padding: 15px;
+
+    border-radius: 12px;
+
+    margin: 20px 0;
+
+    text-align: center;
+}
+
+.status {
+    display: inline-block;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    font-weight: bold;
+}
+
+.menunggu {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.proses {
+    background: #cfe8ff;
+    color: #075985;
+}
+
+.selesai {
+    background: #d1f7df;
+    color: #146c35;
+}
+
+.default-status {
+    background: #eeeeee;
+    color: #444;
+}
+
+
+/* =========================
+   TANGGAPAN ADMIN
+========================= */
+
+.tanggapan-box {
+    background: #effaf2;
+
+    border-left: 5px solid #24875d;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    line-height: 1.6;
+
+    margin-top: 10px;
+}
+
+.tidak-ada {
+    color: #777;
+
+    font-style: italic;
+}
+
+
+/* =========================
+   PESAN
+========================= */
+
+#pesan {
+    display: none;
+
+    padding: 15px;
+
+    margin-top: 15px;
+
+    border-radius: 10px;
+
+    background: #ffecec;
+
+    color: #a40000;
+
+    text-align: center;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:600px) {
+
+    .card {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">
+            🌿
+        </div>
+
+        <h1>
+            Status Pengaduan
+        </h1>
+
+        <p>
+            Desa Sepadu • Dusun Semayang
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         FORM CEK TIKET
+    ========================== -->
+
+    <div class="card">
+
+        <div class="form-group">
+
+            <label>
+                Nomor Tiket Pengaduan
+            </label>
+
+            <input
+                type="text"
+                id="inputTiket"
+                placeholder="Contoh: TKT-20260916-1234"
+            >
+
+        </div>
+
+
+        <button
+            id="btnCek"
+            onclick="cekPengaduan()"
+        >
+
+            🔎 Cek Status Pengaduan
+
+        </button>
+
+
+        <div id="pesan"></div>
+
+    </div>
+
+
+
+    <!-- =========================
+         HASIL PENGADUAN
+    ========================== -->
+
+    <div
+        class="card"
+        id="hasil
