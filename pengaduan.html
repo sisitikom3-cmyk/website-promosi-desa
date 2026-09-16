@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aspirasi & Pengaduan - Desa Sepadu</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f8f3;
+    color: #263b2a;
+}
+
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+    text-align: center;
+    color: #176b3a;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: #176b3a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0f542c;
+}
+
+#hasil {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #e9f7ed;
+    border-radius: 10px;
+}
+
+.tiket {
+    font-size: 20px;
+    font-weight: bold;
+    color: #176b3a;
+}
+
+.loading {
+    text-align: center;
+    display: none;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Aspirasi & Pengaduan</h1>
+
+<p class="subtitle">
+Sampaikan aspirasi atau pengaduan Anda kepada Desa Sepadu.
+Data yang lengkap membantu pengaduan diproses dengan cepat dan jelas.
+</p>
+
+<form id="formPengaduan">
+
+<label>Nama Lengkap</label>
+<input type="text" id="nama" required>
+
+<label>No HP / WhatsApp</label>
+<input type="tel" id="nohp" required>
+
+<label>Judul Pengaduan</label>
+<input
+    type="text"
+    id="judul"
+    placeholder="Contoh: Jalan depan sekolah berlubang"
+    required
+>
+
+<label>Kategori</label>
+<select id="kategori" required>
+    <option value="">-- Pilih Kategori --</option>
+    <option value="Infrastruktur">Infrastruktur</option>
+    <option value="Kesehatan">Kesehatan</option>
+    <option value="Pendidikan">Pendidikan</option>
+    <option value="Lingkungan">Lingkungan</option>
+    <option value="Jerebu">Jerebu</option>
+    <option value="Jalan Rusak">Jalan Rusak</option>
+    <option value="Lainnya">Lainnya</option>
+</select>
+
+<label>Deskripsi Pengaduan</label>
+<textarea
+    id="deskripsi"
+    placeholder="Jelaskan pengaduan secara lengkap..."
+    required
+></textarea>
+
+<button type="submit">
+    Kirim Pengaduan
+</button>
+
+</form>
+
+<div class="loading" id="loading">
+    Mengirim pengaduan...
+</div>
+
+<div id="hasil">
+
+    <h3>Pengaduan Berhasil Dikirim</h3>
+
+    <p>
+        Simpan nomor tiket berikut untuk mengecek tanggapan pengaduan Anda.
+    </p>
+
+    <p>
+        Nomor Tiket:
+        <br>
+        <span class="tiket" id="nomorTiket"></span>
+    </p>
+
+    <button onclick="location.reload()">
+        Kirim Pengaduan Baru
+    </button>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbz6sETq3LEHE-savA7beCu1ArRD0suF63miWzxtQaiGdBBEoxw7MY6u93MXi6fzSqFjRA/exec";
+
+document.getElementById("formPengaduan").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const loading = document.getElementById("loading");
+
+    loading.style.display = "block";
+
+    const data = {
+
+        nama: document.getElementById("nama").value.trim(),
+
+        nohp: document.getElementById("nohp").value.trim(),
+
+        judul: document.getElementById("judul").value.trim(),
+
+        kategori: document.getElementById("kategori").value,
+
+        deskripsi:
+            "Kategori: " +
+            document.getElementById("kategori").value +
+            "\n\n" +
+            document.getElementById("deskripsi").value.trim()
+
+    };
+
+    try {
+
+        const response = await fetch(SCRIPT_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify(data)
+
+        });
+
+        const result = await response.json();
+
+        loading.style.display = "none";
+
+        if (result.success) {
+
+            document.getElementById("formPengaduan").style.display = "none";
+
+            document.getElementById("hasil").style.display = "block";
+
+            document.getElementById("nomorTiket").textContent =
+                result.tiket || "-";
+
+        } else {
+
+            alert(
+                "Pengaduan gagal dikirim: " +
+                (result.message || "Terjadi kesalahan")
+            );
+
+        }
+
+    } catch (error) {
+
+        loading.style.display = "none";
+
+        alert(
+            "Gagal terhubung ke Google Script.\n\n" +
+            error.message
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
