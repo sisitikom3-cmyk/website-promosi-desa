@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aspirasi & Pengaduan - Desa Sepadu</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f8f3;
+    color: #263b2a;
+}
+
+header {
+    background: linear-gradient(135deg, #176b3a, #2e9d5b);
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-size: 27px;
+}
+
+header p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+h2 {
+    color: #176b3a;
+    margin-top: 0;
+}
+
+.section-title {
+    margin-top: 25px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #2e9d5b;
+    color: #176b3a;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+small {
+    color: #666;
+    font-weight: normal;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #176b3a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #12582f;
+}
+
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.kembali {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #176b3a;
+    font-weight: bold;
+}
+
+.info {
+    background: #eef8f0;
+    border-left: 4px solid #2e9d5b;
+    padding: 12px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Aspirasi & Pengaduan</h1>
+    <p>Desa Sepadu - Dusun Semayang</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+    <h2>Sampaikan Aspirasi atau Pengaduan</h2>
+
+    <div class="info">
+        Silakan isi data dengan lengkap agar pengaduan dapat diproses dengan cepat dan jelas.
+    </div>
+
+    <form id="pengaduanForm">
+
+        <h3 class="section-title">Data Pelapor</h3>
+
+        <label for="nama">
+            Nama Lengkap
+        </label>
+
+        <input
+            type="text"
+            id="nama"
+            name="nama"
+            placeholder="Masukkan nama lengkap"
+            required
+        >
+
+        <label for="telepon">
+            No. HP / WhatsApp
+        </label>
+
+        <input
+            type="tel"
+            id="telepon"
+            name="telepon"
+            placeholder="Contoh: 081234567890"
+            required
+        >
+
+        <label for="email">
+            Email <small>(opsional)</small>
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Masukkan email jika ada"
+        >
+
+        <label for="alamat">
+            Alamat / Domisili
+        </label>
+
+        <input
+            type="text"
+            id="alamat"
+            name="alamat"
+            placeholder="Contoh: Dusun Semayang, Desa Sepadu"
+            required
+        >
+
+
+        <h3 class="section-title">Data Pengaduan / Aspirasi</h3>
+
+        <label for="kategori">
+            Kategori / Jenis
+        </label>
+
+        <select id="kategori" name="kategori" required>
+            <option value="">-- Pilih Kategori --</option>
+            <option value="Infrastruktur">Infrastruktur</option>
+            <option value="Kesehatan">Kesehatan</option>
+            <option value="Pendidikan">Pendidikan</option>
+            <option value="Lingkungan">Lingkungan</option>
+            <option value="Jerebu">Jerebu</option>
+            <option value="Jalan Rusak">Jalan Rusak</option>
+            <option value="Lainnya">Lainnya</option>
+        </select>
+
+        <label for="judul">
+            Judul / Ringkasan Singkat
+        </label>
+
+        <input
+            type="text"
+            id="judul"
+            name="judul"
+            placeholder="Contoh: Jalan depan sekolah berlubang"
+            required
+        >
+
+        <label for="deskripsi">
+            Deskripsi Pengaduan
+        </label>
+
+        <textarea
+            id="deskripsi"
+            name="deskripsi"
+            placeholder="Jelaskan pengaduan atau aspirasi Anda secara lengkap..."
+            required
+        ></textarea>
+
+        <label for="lokasi">
+            Lokasi Kejadian
+        </label>
+
+        <input
+            type="text"
+            id="lokasi"
+            name="lokasi"
+            placeholder="Contoh: Jalan Dusun Semayang"
+            required
+        >
+
+        <label for="tanggal">
+            Tanggal Kejadian
+        </label>
+
+        <input
+            type="date"
+            id="tanggal"
+            name="tanggal"
+            required
+        >
+
+        <button type="submit" id="btnKirim">
+            Kirim Pengaduan
+        </button>
+
+    </form>
+
+    <a href="index.html" class="kembali">
+        ← Kembali ke Beranda
+    </a>
+
+</div>
+
+</div>
+
+
+<script>
+
+// =====================================================
+// URL GOOGLE APPS SCRIPT
+// =====================================================
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbzTCoqlRNrkUA14uSr7TtjyacWNlYz4M5g8ZbKJFDlAdiboDV_LEI-s_-CGNUo4NGCBLA/exec";
+
+
+// =====================================================
+// FORM PENGADUAN
+// =====================================================
+
+document.getElementById("pengaduanForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const tombol = document.getElementById("btnKirim");
+
+    tombol.disabled = true;
+    tombol.innerText = "Mengirim...";
+
+
+    // =================================================
+    // DATA YANG DIKIRIM
+    // =================================================
+
+    const data = {
+
+        tiket:
+            "TKT-" +
+            Date.now(),
+
+        tanggalKirim:
+            new Date().toLocaleString("id-ID"),
+
+        nama:
+            document.getElementById("nama").value,
+
+        telepon:
+            document.getElementById("telepon").value,
+
+        email:
+            document.getElementById("email").value,
+
+        alamat:
+            document.getElementById("alamat").value,
+
+        kategori:
+            document.getElementById("kategori").value,
+
+        judul:
+            document.getElementById("judul").value,
+
+        deskripsi:
+            document.getElementById("deskripsi").value,
+
+        lokasi:
+            document.getElementById("lokasi").value,
+
+        tanggal:
+            document.getElementById("tanggal").value,
+
+        status:
+            "Menunggu"
+    };
+
+
+    // =================================================
+    // KIRIM KE GOOGLE APPS SCRIPT
+    // =================================================
+
+    try {
+
+        const response = await fetch(SCRIPT_URL, {
+
+            method: "POST",
+
+            body: JSON.stringify(data)
+
+        });
+
+
+        // =================================================
+        // BERHASIL
+        // =================================================
+
+        alert(
+            "Pengaduan berhasil dikirim.\n\n" +
+            "Nomor tiket: " + data.tiket
+        );
+
+
+        // Simpan nomor tiket agar bisa digunakan
+        // oleh tanggapan.html
+        localStorage.setItem(
+            "nomorTiket",
+            data.tiket
+        );
+
+
+        // Simpan nama pelapor
+        localStorage.setItem(
+            "namaPelapor",
+            data.nama
+        );
+
+
+        // =================================================
+        // LANGSUNG MENUJU TANGGAPAN.HTML
+        // =================================================
+
+        window.location.href = "tanggapan.html";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Pengaduan gagal dikirim.\n" +
+            "Silakan coba lagi."
+        );
+
+        tombol.disabled = false;
+        tombol.innerText = "Kirim Pengaduan";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+
+Dengan kode tersebut alurnya menjadi:
+
+Isi formulir → klik Kirim Pengaduan → data dikirim ke Google Sheets → nomor tiket disimpan → otomatis membuka "tanggapan.html".
+
+Pastikan "pengaduan.html" dan "tanggapan.html" berada dalam folder yang sama di GitHub. Kalau "tanggapan.html" juga harus langsung menampilkan status pengaduan berdasarkan nomor tiket yang baru dikirim, kirimkan kode "tanggapan.html" kamu dan saya bisa sesuaikan agar tersambung ke Google Sheets.
