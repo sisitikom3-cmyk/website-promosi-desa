@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Pengaduan - Desa Sepadu</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f8f3;
+    color: #263b2a;
+}
+
+header {
+    background: #176b3a;
+    color: white;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.refresh {
+    background: #176b3a;
+    color: white;
+}
+
+.logout {
+    background: #c62828;
+    color: white;
+}
+
+.table-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    overflow-x: auto;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #176b3a;
+    color: white;
+}
+
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+textarea {
+    min-height: 80px;
+}
+
+.simpan {
+    margin-top: 7px;
+    background: #176b3a;
+    color: white;
+    width: 100%;
+}
+
+.hapus {
+    background: #c62828;
+    color: white;
+}
+
+.status-box {
+    min-width: 150px;
+}
+
+#loading {
+    display: none;
+    padding: 15px;
+    background: #fff3cd;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+#pesan {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.empty {
+    text-align: center;
+    padding: 30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Admin Pengaduan Desa Sepadu</h1>
+
+</header>
+
+<div class="container">
+
+<div class="toolbar">
+
+<button class="refresh" onclick="ambilData()">
+    🔄 Refresh Data
+</button>
+
+<button class="logout" onclick="logout()">
+    Logout
+</button>
+
+</div>
+
+<div id="loading">
+    Mengambil data pengaduan...
+</div>
+
+<div id="pesan"></div>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>No</th>
+<th>ID</th>
+<th>Tiket</th>
+<th>Nama</th>
+<th>No HP</th>
+<th>Judul</th>
+<th>Deskripsi</th>
+<th>Status</th>
+<th>Tanggapan</th>
+<th>Tanggal</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="dataPengaduan">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbz6sETq3LEHE-savA7beCu1ArRD0suF63miWzxtQaiGdBBEoxw7MY6u93MXi6fzSqFjRA/exec";
+
+
+/* ==============================
+   CEK LOGIN ADMIN
+============================== */
+
+if (sessionStorage.getItem("adminLogin") !== "true") {
+
+    window.location.href = "loginadmin.html";
+
+}
+
+
+/* ==============================
+   ESCAPE HTML
+============================== */
+
+function escapeHTML(text) {
+
+    if (text === null || text === undefined) {
+        return "";
+    }
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==============================
+   AMBIL DATA
+============================== */
+
+async function ambilData() {
+
+    const loading =
+        document.getElementById("loading");
+
+    const tbody =
+        document.getElementById("dataPengaduan");
+
+    const pesan =
+        document.getElementById("pesan");
+
+    loading.style.display = "block";
+
+    pesan.textContent = "";
+
+    try {
+
+        const response =
+            await fetch(SCRIPT_URL);
+
+        const result =
+            await response.json();
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message ||
+                "Gagal mengambil data"
+            );
+
+        }
+
+        tbody.innerHTML = "";
+
+        const data = result.data || [];
+
+        if (data.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="11" class="empty">
+                        Belum ada pengaduan.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        data.forEach(function(item, index) {
+
+            const tr =
+                document.createElement("tr");
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${escapeHTML(item.id)}
+                </td>
+
+                <td>
+                    <strong>
+                        ${escapeHTML(item.tiket)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${escapeHTML(item.nama)}
+                </td>
+
+                <td>
+                    ${escapeHTML(item.nohp)}
+                </td>
+
+                <td>
+                    ${escapeHTML(item.judul)}
+                </td>
+
+                <td>
+                    ${escapeHTML(item.deskripsi)}
+                </td>
+
+                <td class="status-box">
+
+                    <select
+                        id="status-${item.row}"
+                    >
+
+                        <option value="Menunggu">
+                            Menunggu
+                        </option>
+
+                        <option value="Diterima">
+                            Diterima
+                        </option>
+
+                        <option value="Diproses">
+                            Diproses
+                        </option>
+
+                        <option value="Ditindaklanjuti">
+                            Ditindaklanjuti
+                        </option>
+
+                        <option value="Selesai">
+                            Selesai
+                        </option>
+
+                    </select>
+
+                    <button
+                        class="simpan"
+                        onclick="ubahStatus(${item.row})"
+                    >
+                        Simpan Status
+                    </button>
+
+                </td>
+
+                <td>
+
+                    <textarea
+                        id="tanggapan-${item.row}"
+                        placeholder="Tulis tanggapan..."
+                    >${escapeHTML(item.tanggapan)}</textarea>
+
+                    <button
+                        class="simpan"
+                        onclick="simpanTanggapan(${item.row})"
+                    >
+                        Simpan Tanggapan
+                    </button>
+
+                </td>
+
+                <td>
+                    ${escapeHTML(item.tanggal)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="hapus"
+                        onclick="hapusData(${item.row})"
+                    >
+                        Hapus
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(tr);
+
+
+            const statusSelect =
+                document.getElementById(
+                    "status-" + item.row
+                );
+
+            statusSelect.value =
+                item.status || "Menunggu";
+
+        });
+
+
+    } catch (error) {
+
+        pesan.textContent =
+            "❌ Gagal mengambil data: " +
+            error.message;
+
+        pesan.style.color = "red";
+
+    } finally {
+
+        loading.style.display = "none";
+
+    }
+
+}
+
+
+/* ==============================
+   UBAH STATUS
+============================== */
+
+async function ubahStatus(row) {
+
+    const select =
+        document.getElementById(
+            "status-" + row
+        );
+
+    const status =
+        select.value;
+
+
+    if (!confirm(
+        "Ubah status pengaduan menjadi " +
+        status +
+        "?"
+    )) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(SCRIPT_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+
+                    action: "updateStatus",
+
+                    row: row,
+
+                    status: status
+
+                })
+
+            });
+
+
+        const result =
+            await response.json();
+
+
+        if (result.success) {
+
+            alert("Status berhasil diperbarui.");
+
+            ambilData();
+
+        } else {
+
+            alert(
+                "Gagal mengubah status: " +
+                result.message
+            );
+
+        }
+
+
+    } catch (error) {
+
+        alert(
+            "Gagal terhubung ke Google Script:\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==============================
+   SIMPAN TANGGAPAN
+============================== */
+
+async function simpanTanggapan(row) {
+
+    const textarea =
+        document.getElementById(
+            "tanggapan-" + row
+        );
+
+    const tanggapan =
+        textarea.value.trim();
+
+
+    if (!tanggapan) {
+
+        alert(
+            "Tanggapan belum diisi."
+        );
+
+        return;
+
+    }
+
+
+    if (!confirm(
+        "Simpan tanggapan ini?"
+    )) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(SCRIPT_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+
+                    action:
+                        "updateTanggapan",
+
+                    row: row,
+
+                    tanggapan:
+                        tanggapan
+
+                })
+
+            });
+
+
+        const result =
+            await response.json();
+
+
+        if (result.success) {
+
+            alert(
+                "Tanggapan berhasil disimpan."
+            );
+
+            ambilData();
+
+        } else {
+
+            alert(
+                "Gagal menyimpan tanggapan: " +
+                result.message
+            );
+
+        }
+
+
+    } catch (error) {
+
+        alert(
+            "Gagal terhubung ke Google Script:\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==============================
+   HAPUS DATA
+============================== */
+
+async function hapusData(row) {
+
+    if (!confirm(
+        "Yakin ingin menghapus pengaduan ini?"
+    )) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(SCRIPT_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+
+                    action: "delete",
+
+                    row: row
+
+                })
+
+            });
+
+
+        const result =
+            await response.json();
+
+
+        if (result.success) {
+
+            alert(
+                "Data berhasil dihapus."
+            );
+
+            ambilData();
+
+        } else {
+
+            alert(
+                "Gagal menghapus data: " +
+                result.message
+            );
+
+        }
+
+
+    } catch (error) {
+
+        alert(
+            "Gagal terhubung ke Google Script:\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==============================
+   LOGOUT
+============================== */
+
+function logout() {
+
+    sessionStorage.removeItem(
+        "adminLogin"
+    );
+
+    window.location.href =
+        "loginadmin.html";
+
+}
+
+
+/* ==============================
+   LOAD AWAL
+============================== */
+
+ambilData();
+
+</script>
+
+</body>
+
+</html>
