@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aspirasi & Pengaduan - Desa Sepadu</title>
+
+<style>
+
+/* =========================================
+   DASAR
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf8ef,
+            #dff4eb,
+            #dceefa
+        );
+
+    color: #23402e;
+    min-height: 100vh;
+
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    font-size: 50px;
+}
+
+.header h1 {
+    margin: 5px 0;
+
+    color: #176b3a;
+}
+
+.header p {
+    color: #607568;
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.card {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.10);
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro {
+    background: #effaf2;
+
+    border-left: 5px solid #24875d;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+
+    color: #245339;
+}
+
+input,
+textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #d5e3da;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    font-family: Arial, sans-serif;
+}
+
+textarea {
+    min-height: 130px;
+
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #24875d;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+button {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176f47,
+            #268fb1
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+button:disabled {
+    opacity: .7;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   POPUP BERHASIL
+========================================= */
+
+.popup {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+.popup-box {
+    width: 100%;
+
+    max-width: 450px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.2);
+
+    animation:
+        muncul .3s ease;
+}
+
+@keyframes muncul {
+
+    from {
+        transform: scale(.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================
+   ICON BERHASIL
+========================================= */
+
+.success-icon {
+    width: 80px;
+
+    height: 80px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: #e7f8ec;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 45px;
+
+    animation:
+        pop .5s ease;
+}
+
+@keyframes pop {
+
+    0% {
+        transform: scale(.3);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================
+   TEKS POPUP
+========================================= */
+
+.popup-box h2 {
+    color: #176b3a;
+
+    margin-top: 18px;
+}
+
+.popup-box p {
+    color: #607568;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   TIKET
+========================================= */
+
+.ticket-box {
+    background: #effaf2;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    margin: 18px 0;
+}
+
+.ticket-box small {
+    color: #607568;
+}
+
+.ticket-box strong {
+    display: block;
+
+    font-size: 22px;
+
+    color: #176f47;
+
+    margin-top: 5px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   TOMBOL TUTUP
+========================================= */
+
+.btn-close {
+    margin-top: 10px;
+
+    background: #e9efeb;
+
+    color: #245339;
+}
+
+.btn-close:hover {
+    background: #dce8df;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:600px) {
+
+    body {
+        padding: 20px 12px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .logo {
+        font-size: 42px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <div class="header">
+
+        <div class="logo">
+            🌿
+        </div>
+
+        <h1>
+            Aspirasi & Pengaduan
+        </h1>
+
+        <p>
+            Desa Sepadu • Dusun Semayang
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         FORM
+    ====================================== -->
+
+    <div class="card">
+
+
+        <div class="intro">
+
+            Silakan isi data pengaduan dengan lengkap
+            agar dapat diproses dengan cepat dan jelas.
+
+        </div>
+
+
+        <form
+            id="pengaduanForm"
+
+            action="https://script.google.com/macros/s/AKfycbwBl19kyHSLpBpOkYnzyW8T1moq70GNnTPSyOoSRLqghEeitGVZXIrMN9uAg3nl_BdZrA/exec"
+
+            method="POST"
+
+            target="hiddenFrame"
+
+            onsubmit="kirimPengaduan(event)"
+        >
+
+
+            <!-- =================================
+                 NAMA
+            ================================== -->
+
+            <div class="form-group">
+
+                <label for="nama">
+                    Nama Lengkap
+                </label>
+
+                <input
+                    type="text"
+                    name="nama"
+                    id="nama"
+
+                    placeholder="Masukkan nama lengkap"
+
+                    required
+                >
+
+            </div>
+
+
+            <!-- =================================
+                 NO HP
+            ================================== -->
+
+            <div class="form-group">
+
+                <label for="nohp">
+                    No. HP / WhatsApp
+                </label>
+
+                <input
+                    type="tel"
+                    name="nohp"
+                    id="nohp"
+
+                    placeholder="Contoh: 081234567890"
+
+                    required
+                >
+
+            </div>
+
+
+            <!-- =================================
+                 JUDUL
+            ================================== -->
+
+            <div class="form-group">
+
+                <label for="judul">
+                    Judul Pengaduan
+                </label>
+
+                <input
+                    type="text"
+                    name="judul"
+                    id="judul"
+
+                    placeholder="Contoh: Jalan rusak"
+
+                    required
+                >
+
+            </div>
+
+
+            <!-- =================================
+                 DESKRIPSI
+            ================================== -->
+
+            <div class="form-group">
+
+                <label for="deskripsi">
+                    Deskripsi Pengaduan
+                </label>
+
+                <textarea
+                    name="deskripsi"
+                    id="deskripsi"
+
+                    placeholder="Jelaskan pengaduan Anda secara lengkap..."
+
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <!-- =================================
+                 TIKET
+                 MASUK KE KOLOM H
+            ================================== -->
+
+            <input
+                type="hidden"
+                name="tiket"
+                id="tiket"
+            >
+
+
+            <!-- =================================
+                 TANGGAL
+                 BACKEND JUGA AKAN MENGISI
+                 KOLOM G
+            ================================== -->
+
+            <input
+                type="hidden"
+                name="tanggalKirim"
+                id="tanggalKirim"
+            >
+
+
+            <!-- =================================
+                 STATUS
+                 MASUK KE KOLOM F
+            ================================== -->
+
+            <input
+                type="hidden"
+                name="status"
+                value="Menunggu"
+            >
+
+
+            <!-- =================================
+                 TOMBOL KIRIM
+            ================================== -->
+
+            <button
+                type="submit"
+                id="btnKirim"
+            >
+
+                📩 Kirim Pengaduan
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================
+     IFRAME TERSEMBUNYI
+
+     Digunakan agar halaman tidak berpindah
+     ketika mengirim POST ke Apps Script.
+========================================= -->
+
+<iframe
+    name="hiddenFrame"
+    style="display:none;"
+></iframe>
+
+
+
+<!-- =========================================
+     POPUP BERHASIL
+========================================= -->
+
+<div
+    class="popup"
+    id="successPopup"
+>
+
+
+    <div class="popup-box">
+
+
+        <!-- ICON -->
+
+        <div class="success-icon">
+            ✅
+        </div>
+
+
+        <!-- JUDUL -->
+
+        <h2>
+            Pengaduan Berhasil Dikirim
+        </h2>
+
+
+        <!-- PESAN -->
+
+        <p>
+
+            Terima kasih atas informasinya.
+
+            <br>
+
+            Pengaduan Anda telah berhasil
+            dikirim ke Desa Sepadu.
+
+        </p>
+
+
+        <!-- =================================
+             NOMOR TIKET
+        ================================== -->
+
+        <div class="ticket-box">
+
+            <small>
+                Nomor Tiket Pengaduan
+            </small>
+
+            <strong id="nomorTiket">
+                -
+            </strong>
+
+        </div>
+
+
+        <p>
+
+            Silakan simpan nomor tiket ini
+            sebagai bukti pengaduan Anda.
+
+        </p>
+
+
+        <!-- =================================
+             TOMBOL TUTUP
+        ================================== -->
+
+        <button
+            type="button"
+            class="btn-close"
+            onclick="tutupPopup()"
+        >
+
+            Tutup
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   GOOGLE APPS SCRIPT
+===================================================== */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwBl19kyHSLpBpOkYnzyW8T1moq70GNnTPSyOoSRLqghEeitGVZXIrMN9uAg3nl_BdZrA/exec";
+
+
+/* =====================================================
+   MEMBUAT NOMOR TIKET
+===================================================== */
+
+function buatTiket() {
+
+    const sekarang = new Date();
+
+
+    const tahun =
+        sekarang.getFullYear();
+
+
+    const bulan =
+        String(
+            sekarang.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const tanggal =
+        String(
+            sekarang.getDate()
+        ).padStart(2, "0");
+
+
+    const angkaAcak =
+        Math.floor(
+            1000 +
+            Math.random() * 9000
+        );
+
+
+    return (
+        "TKT-" +
+        tahun +
+        bulan +
+        tanggal +
+        "-" +
+        angkaAcak
+    );
+
+}
+
+
+/* =====================================================
+   KIRIM PENGADUAN
+===================================================== */
+
+function kirimPengaduan(event) {
+
+    /*
+       Mencegah halaman berpindah
+    */
+
+    event.preventDefault();
+
+
+    const form =
+        document.getElementById(
+            "pengaduanForm"
+        );
+
+
+    const tombol =
+        document.getElementById(
+            "btnKirim"
+        );
+
+
+    /* =========================================
+       VALIDASI
+    ========================================= */
+
+    if (
+        !form.nama.value.trim() ||
+        !form.nohp.value.trim() ||
+        !form.judul.value.trim() ||
+        !form.deskripsi.value.trim()
+    ) {
+
+        alert(
+            "Mohon lengkapi semua data pengaduan."
+        );
+
+        return;
+    }
+
+
+    /* =========================================
+       BUAT TIKET
+    ========================================= */
+
+    const tiket =
+        buatTiket();
+
+
+    document.getElementById(
+        "tiket"
+    ).value = tiket;
+
+
+    /* =========================================
+       TANGGAL
+    ========================================= */
+
+    document.getElementById(
+        "tanggalKirim"
+    ).value =
+        new Date().toISOString();
+
+
+    /* =========================================
+       SIMPAN TIKET DI HP/BRROWSER
+    ========================================= */
+
+    localStorage.setItem(
+        "tiketPengaduan",
+        tiket
+    );
+
+
+    /* =========================================
+       TOMBOL LOADING
+    ========================================= */
+
+    tombol.disabled = true;
+
+    tombol.innerHTML =
+        "⏳ Mengirim pengaduan...";
+
+
+    /* =========================================
+       KIRIM KE GOOGLE APPS SCRIPT
+
+       Data akan masuk ke database:
+
+       B = Nama
+       C = No.HP
+       D = Judul Pengaduan
+       E = Deskripsi Pengaduan
+       F = Status
+       G = Tanggal
+       H = Tiket
+
+       Kolom I Tanggapan akan diisi admin
+       melalui sistem admin.
+    ========================================= */
+
+    form.submit();
+
+
+    /* =========================================
+       TUNGGU SEBENTAR LALU TAMPILKAN
+       REAKSI BERHASIL
+    ========================================= */
+
+    setTimeout(function() {
+
+
+        /* Tampilkan nomor tiket */
+
+        document.getElementById(
+            "nomorTiket"
+        ).textContent =
+            tiket;
+
+
+        /* Tampilkan popup */
+
+        document.getElementById(
+            "successPopup"
+        ).style.display =
+            "flex";
+
+
+        /* Reset form */
+
+        form.reset();
+
+
+        /* Kembalikan tombol */
+
+        tombol.disabled = false;
+
+        tombol.innerHTML =
+            "📩 Kirim Pengaduan";
+
+
+    }, 1500);
+
+}
+
+
+/* =====================================================
+   TUTUP POPUP
+===================================================== */
+
+function tutupPopup() {
+
+    document.getElementById(
+        "successPopup"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   KLIK DI LUAR POPUP
+===================================================== */
+
+document.getElementById(
+    "successPopup"
+).addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target === this
+        ) {
+
+            tutupPopup();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
