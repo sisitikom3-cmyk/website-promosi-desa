@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Cek Pengaduan</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-cek {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .form-cek input {
+            flex: 1;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .form-cek button {
+            padding: 13px 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .form-cek button:hover {
+            background: #1d4ed8;
+        }
+
+        .form-cek button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        .hasil {
+            display: none;
+        }
+
+        .judul-hasil {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .data-item {
+            margin-bottom: 15px;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .nilai {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            border-radius: 7px;
+            min-height: 20px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .status-menunggu {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-diproses {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-selesai {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-ditolak {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tiket-box {
+            text-align: center;
+            background: #eff6ff;
+            border: 1px solid #60a5fa;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tiket-box small {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .nomor-tiket {
+            font-size: 23px;
+            font-weight: bold;
+            color: #1d4ed8;
+        }
+
+        .pesan {
+            display: none;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 7px;
+        }
+
+        .pesan-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        .pesan-loading {
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #60a5fa;
+        }
+
+        @media (max-width: 600px) {
+
+            .form-cek {
+                flex-direction: column;
+            }
+
+            .form-cek button {
+                width: 100%;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>
+            🔎 Cek Pengaduan
+        </h2>
+
+
+        <div class="form-cek">
+
+            <input
+                type="text"
+                id="tiket"
+                placeholder="Masukkan nomor tiket, contoh TKT-20260917123456"
+                autocomplete="off"
+            >
+
+            <button
+                id="btnCek"
+                onclick="cekPengaduan()"
+            >
+                🔍 Cek Pengaduan
+            </button>
+
+        </div>
+
+
+        <div
+            class="pesan pesan-loading"
+            id="loading"
+        >
+            ⏳ Sedang mencari pengaduan...
+        </div>
+
+
+        <div
+            class="pesan pesan-error"
+            id="error"
+        ></div>
+
+
+        <div
+            class="hasil"
+            id="hasil"
+        >
+
+
+            <div class="tiket-box">
+
+                <small>
+                    Nomor Tiket
+                </small>
+
+                <div
+                    class="nomor-tiket"
+                    id="nomorTiket"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="judul-hasil">
+
+                <h3>
+                    📋 Data Pengaduan
+                </h3>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    Nama
+                </div>
+
+                <div
+                    class="nilai"
+                    id="nama"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    No. HP
+                </div>
+
+                <div
+                    class="nilai"
+                    id="nohp"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    Judul Pengaduan
+                </div>
+
+                <div
+                    class="nilai"
+                    id="judul"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    Deskripsi Pengaduan
+                </div>
+
+                <div
+                    class="nilai"
+                    id="deskripsi"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    Status
+                </div>
+
+                <div
+                    class="nilai"
+                    id="status"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    Tanggal
+                </div>
+
+                <div
+                    class="nilai"
+                    id="tanggal"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    Tiket
+                </div>
+
+                <div
+                    class="nilai"
+                    id="tiketHasil"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="data-item">
+
+                <div class="label">
+                    💬 Tanggapan Admin
+                </div>
+
+                <div
+                    class="nilai"
+                    id="tanggapan"
+                >
+                    Belum ada tanggapan dari admin.
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbwaXiwSNbZjEowc-MBEN_SMDX5NSnMuBwf1FK4Fd0AO4Eqkti-M6JUrotDK4SmtJEL7/exec";
+
+
+const inputTiket =
+document.getElementById("tiket");
+
+const btnCek =
+document.getElementById("btnCek");
+
+const loading =
+document.getElementById("loading");
+
+const errorBox =
+document.getElementById("error");
+
+const hasil =
+document.getElementById("hasil");
+
+
+
+function escapeHTML(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+function statusClass(status) {
+
+    const s =
+        String(status || "")
+        .toLowerCase();
+
+
+    if (s.includes("selesai")) {
+
+        return "status-selesai";
+
+    }
+
+
+    if (s.includes("proses")) {
+
+        return "status-diproses";
+
+    }
+
+
+    if (s.includes("tolak")) {
+
+        return "status-ditolak";
+
+    }
+
+
+    return "status-menunggu";
+
+}
+
+
+
+async function cekPengaduan() {
+
+
+    const tiket =
+        inputTiket.value.trim();
+
+
+    hasil.style.display = "none";
+
+    errorBox.style.display = "none";
+
+
+    if (tiket === "") {
+
+        errorBox.innerText =
+            "Silakan masukkan nomor tiket.";
+
+        errorBox.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    btnCek.disabled = true;
+
+    btnCek.innerText =
+        "⏳ Mencari...";
+
+    loading.style.display =
+        "block";
+
+
+    try {
+
+
+        const url =
+            API_URL +
+            "?action=cek&tiket=" +
+            encodeURIComponent(tiket);
+
+
+        const response =
+            await fetch(url);
+
+
+        const result =
+            await response.json();
+
+
+        loading.style.display =
+            "none";
+
+
+        if (!result.success) {
+
+            errorBox.innerText =
+                result.message ||
+                "Nomor tiket tidak ditemukan.";
+
+            errorBox.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        const data =
+            result.data;
+
+
+        document.getElementById(
+            "nomorTiket"
+        ).innerText =
+            data.tiket || "-";
+
+
+        document.getElementById(
+            "tiketHasil"
+        ).innerText =
+            data.tiket || "-";
+
+
+        document.getElementById(
+            "nama"
+        ).innerText =
+            data.nama || "-";
+
+
+        document.getElementById(
+            "nohp"
+        ).innerText =
+            data.telepon ||
+            data.nohp ||
+            "-";
+
+
+        document.getElementById(
+            "judul"
+        ).innerText =
+            data.judul || "-";
+
+
+        document.getElementById(
+            "deskripsi"
+        ).innerText =
+            data.deskripsi || "-";
+
+
+        const status =
+            data.status ||
+            "Menunggu";
+
+
+        document.getElementById(
+            "status"
+        ).innerHTML = `
+
+            <span
+                class="status
+                ${statusClass(status)}"
+            >
+                ${escapeHTML(status)}
+            </span>
+
+        `;
+
+
+        document.getElementById(
+            "tanggal"
+        ).innerText =
+            data.tanggal || "-";
+
+
+        document.getElementById(
+            "tanggapan"
+        ).innerText =
+            data.tanggapan ||
+            "Belum ada tanggapan dari admin.";
+
+
+        hasil.style.display =
+            "block";
+
+
+        hasil.scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    } catch (error) {
+
+
+        console.error(error);
+
+
+        loading.style.display =
+            "none";
+
+
+        errorBox.innerText =
+            "Gagal terhubung ke server. " +
+            "Silakan coba lagi.";
+
+
+        errorBox.style.display =
+            "block";
+
+
+    } finally {
+
+
+        btnCek.disabled = false;
+
+        btnCek.innerText =
+            "🔍 Cek Pengaduan";
+
+    }
+
+}
+
+
+
+inputTiket.addEventListener(
+    "keypress",
+    function(e) {
+
+        if (e.key === "Enter") {
+
+            cekPengaduan();
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
