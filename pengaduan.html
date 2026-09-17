@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Form Pengaduan</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #btnKirim {
+            background: #2563eb;
+        }
+
+        #btnKirim:hover {
+            background: #1d4ed8;
+        }
+
+        #btnKirim:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        /* HASIL */
+        .hasil {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+        }
+
+        .info {
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .tiket {
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+            letter-spacing: 1px;
+            color: #065f46;
+            background: white;
+            padding: 12px;
+            border-radius: 7px;
+        }
+
+        /* TOMBOL CEK */
+        .btnCek {
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+            padding: 13px;
+            background: #059669;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btnCek:hover {
+            background: #047857;
+        }
+
+        /* ERROR */
+        .error {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+            border-radius: 7px;
+        }
+
+        /* TOMBOL CEK DI BAWAH */
+        .menuCek {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .menuCek a {
+            display: inline-block;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .menuCek a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>📢 Form Pengaduan</h2>
+
+        <form id="formPengaduan">
+
+            <!-- NAMA -->
+            <label for="nama">
+                Nama Lengkap
+            </label>
+
+            <input
+                type="text"
+                id="nama"
+                name="nama"
+                placeholder="Masukkan nama lengkap"
+                required
+            >
+
+            <!-- NO HP -->
+            <label for="nohp">
+                No. HP
+            </label>
+
+            <input
+                type="tel"
+                id="nohp"
+                name="nohp"
+                placeholder="Masukkan nomor HP"
+                required
+            >
+
+            <!-- JUDUL -->
+            <label for="judul">
+                Judul Pengaduan
+            </label>
+
+            <input
+                type="text"
+                id="judul"
+                name="judul"
+                placeholder="Masukkan judul pengaduan"
+                required
+            >
+
+            <!-- DESKRIPSI -->
+            <label for="deskripsi">
+                Deskripsi Pengaduan
+            </label>
+
+            <textarea
+                id="deskripsi"
+                name="deskripsi"
+                placeholder="Jelaskan pengaduan Anda..."
+                required
+            ></textarea>
+
+            <!-- TOMBOL KIRIM -->
+            <button
+                type="submit"
+                id="btnKirim"
+            >
+                📤 Kirim Pengaduan
+            </button>
+
+        </form>
+
+
+        <!-- ========================================= -->
+        <!-- HASIL PENGADUAN -->
+        <!-- ========================================= -->
+
+        <div
+            class="hasil"
+            id="hasil"
+        >
+
+            <div class="info">
+
+                <strong>
+                    ✅ Pengaduan berhasil dikirim!
+                </strong>
+
+                <p>
+                    Pengaduan Anda telah berhasil
+                    disimpan.
+                </p>
+
+                <p>
+                    Simpan nomor tiket berikut
+                    untuk mengecek status pengaduan.
+                </p>
+
+            </div>
+
+
+            <!-- NOMOR TIKET -->
+
+            <div
+                class="tiket"
+                id="nomorTiket"
+            >
+                -
+            </div>
+
+
+            <div class="info">
+
+                Gunakan nomor tiket tersebut
+                untuk mengecek status dan tanggapan
+                pengaduan Anda.
+
+            </div>
+
+
+            <!-- ===================================== -->
+            <!-- TOMBOL CEK STATUS -->
+            <!-- ===================================== -->
+
+            <a
+                href="tanggapan.html"
+                class="btnCek"
+                id="btnCekStatus"
+            >
+                🔍 Cek Status Pengaduan
+            </a>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- ERROR -->
+        <!-- ========================================= -->
+
+        <div
+            class="error"
+            id="error"
+        >
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- MENU CEK STATUS -->
+        <!-- ========================================= -->
+
+        <div class="menuCek">
+
+            <a href="tanggapan.html">
+                🔎 Sudah punya nomor tiket? Cek Status Pengaduan
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// =====================================================
+// URL GOOGLE APPS SCRIPT
+// =====================================================
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzl9v2wCXQhe0_T-AMcfPC1dEy09ico1PpL9vojrANAEhlkvZfgY7shY-wL0y_M7E9z/exec";
+
+
+// =====================================================
+// ELEMENT
+// =====================================================
+
+const form =
+document.getElementById("formPengaduan");
+
+const btnKirim =
+document.getElementById("btnKirim");
+
+const hasil =
+document.getElementById("hasil");
+
+const errorBox =
+document.getElementById("error");
+
+const nomorTiket =
+document.getElementById("nomorTiket");
+
+
+// =====================================================
+// SUBMIT FORM
+// =====================================================
+
+form.addEventListener(
+    "submit",
+    async function(e) {
+
+        e.preventDefault();
+
+
+        // Sembunyikan hasil dan error
+        hasil.style.display = "none";
+        errorBox.style.display = "none";
+
+
+        // Nonaktifkan tombol
+        btnKirim.disabled = true;
+        btnKirim.innerText = "⏳ Mengirim...";
+
+
+        // =================================================
+        // AMBIL DATA FORM
+        // =================================================
+
+        const data = {
+
+            action: "add",
+
+            nama:
+            document
+                .getElementById("nama")
+                .value
+                .trim(),
+
+            nohp:
+            document
+                .getElementById("nohp")
+                .value
+                .trim(),
+
+            judul:
+            document
+                .getElementById("judul")
+                .value
+                .trim(),
+
+            deskripsi:
+            document
+                .getElementById("deskripsi")
+                .value
+                .trim()
+
+        };
+
+
+        // =================================================
+        // KIRIM KE GOOGLE APPS SCRIPT
+        // =================================================
+
+        try {
+
+            const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                        "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                    JSON.stringify(data)
+                }
+            );
+
+
+            // Ambil response JSON
+            const result =
+            await response.json();
+
+
+            // =================================================
+            // BERHASIL
+            // =================================================
+
+            if (result.success) {
+
+                // Reset form
+                form.reset();
+
+
+                // Tampilkan nomor tiket
+                nomorTiket.innerText =
+                    result.tiket || "-";
+
+
+                // Tampilkan kotak berhasil
+                hasil.style.display =
+                    "block";
+
+
+                // Scroll ke hasil
+                hasil.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }
+
+
+            // =================================================
+            // GAGAL
+            // =================================================
+
+            else {
+
+                errorBox.innerText =
+                    result.message ||
+                    "Pengaduan gagal dikirim.";
+
+                errorBox.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        // =================================================
+        // ERROR CONNECTION
+        // =================================================
+
+        catch (error) {
+
+            console.error(error);
+
+            errorBox.innerText =
+                "Tidak dapat terhubung ke server pengaduan.";
+
+            errorBox.style.display =
+                "block";
+
+        }
+
+
+        // =================================================
+        // AKTIFKAN KEMBALI TOMBOL
+        // =================================================
+
+        btnKirim.disabled =
+            false;
+
+        btnKirim.innerText =
+            "📤 Kirim Pengaduan";
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
