@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Aspirasi & Pengaduan - Desa Sepadu</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f8f3;
+    color: #263b2a;
+}
+
+header {
+    background: linear-gradient(135deg, #176b3a, #2e9d5b);
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-size: 27px;
+}
+
+header p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+h2 {
+    color: #176b3a;
+    margin-top: 0;
+}
+
+.section-title {
+    margin-top: 25px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #2e9d5b;
+    color: #176b3a;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+small {
+    color: #666;
+    font-weight: normal;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #176b3a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #12582f;
+}
+
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.kembali {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #176b3a;
+    font-weight: bold;
+}
+
+.info {
+    background: #eef8f0;
+    border-left: 4px solid #2e9d5b;
+    padding: 12px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <h1>Aspirasi & Pengaduan</h1>
+
+    <p>
+        Desa Sepadu - Dusun Semayang
+    </p>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+
+<h2>
+    Sampaikan Aspirasi atau Pengaduan
+</h2>
+
+
+<div class="info">
+
+    Silakan isi data dengan lengkap agar pengaduan
+    dapat diproses dengan cepat dan jelas.
+
+</div>
+
+
+<form id="pengaduanForm">
+
+
+<!-- ========================================= -->
+<!-- DATA PELAPOR -->
+<!-- ========================================= -->
+
+<h3 class="section-title">
+    Data Pelapor
+</h3>
+
+
+<label for="nama">
+    Nama Lengkap
+</label>
+
+<input
+    type="text"
+    id="nama"
+    placeholder="Masukkan nama lengkap"
+    required
+>
+
+
+<label for="telepon">
+    No. HP / WhatsApp
+</label>
+
+<input
+    type="tel"
+    id="telepon"
+    placeholder="Contoh: 081234567890"
+    required
+>
+
+
+<label for="alamat">
+    Alamat / Domisili
+</label>
+
+<input
+    type="text"
+    id="alamat"
+    placeholder="Contoh: Dusun Semayang, Desa Sepadu"
+    required
+>
+
+
+<!-- ========================================= -->
+<!-- DATA PENGADUAN -->
+<!-- ========================================= -->
+
+<h3 class="section-title">
+    Data Pengaduan
+</h3>
+
+
+<label for="judul">
+    Judul Pengaduan
+</label>
+
+<input
+    type="
